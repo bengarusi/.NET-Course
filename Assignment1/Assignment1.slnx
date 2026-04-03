@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Ex01_1/Ex01_1.csproj" Id="571abf77-85af-4deb-823f-bd8854c95560" />
+  <Project Path="Ex01_2/Ex01_2.csproj" Id="9fc2147e-4fc3-4c0c-9ea5-0ff5ccf13301" />
+  <Project Path="Ex01_3/Ex01_3.csproj" Id="9833a4de-d7ea-43dc-898c-a885fbfc82ba" />
+  <Project Path="Ex01_4/Ex01_4.csproj" Id="853fd4ab-2b0d-42f7-aa83-ecfb7e8fa2c3" />
+  <Project Path="Ex01_5/Ex01_5.csproj" Id="d7b5a269-1d50-4a03-83c2-1d455b6c40f4" />
+</Solution>
