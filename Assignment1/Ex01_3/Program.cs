@@ -9,9 +9,9 @@ namespace Ex01_3
        
         public static void Main(string[] args)
         {
-            int treeHeight = InputHandler.getValidTreeHeight();
+            int treeHeight = InputHandler.GetValidTreeHeight();
 
-            LetterTreeUtils.printLetterTree(treeHeight);
+            LetterTreeUtils.PrintLetterTree(treeHeight);
         }
 
     }
