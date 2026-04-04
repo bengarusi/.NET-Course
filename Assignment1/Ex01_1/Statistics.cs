@@ -48,60 +48,63 @@ namespace Ex01_1
             {
                 sum += numbers[i];
             }
-            Console.WriteLine($"Average: {sum / numbers.Length}");
+            string msg = String.Format("Average: {0:f}", sum / Globals.NumberOfBinaryNumbers);
+           Console.WriteLine( msg );
         }
 
 
         private static void longestBitRun(string[] numbers)
         {
-
-            string numberWithLongestBitRun = "";
+            List<string> numbersWithLongestBitRun = new List<string>();
             int longestBitSequence = 1;
+
             for (int i = 0; i < numbers.Length; i++)
             {
-
                 int zeroSequence = 0;
                 int oneSequence = 0;
+                int longestInCurrentNumber = 1;
 
                 for (int j = 0; j < Globals.BinaryNumberLength; j++)
                 {
                     if (numbers[i][j] == '0')
                     {
-                        if (oneSequence > longestBitSequence)
-                        {
-                            longestBitSequence = oneSequence;
-                            numberWithLongestBitRun = numbers[i];
-                        }
-
                         zeroSequence++;
                         oneSequence = 0;
-                    }
 
-                    if (numbers[i][j] == '1')
-                    {
-                        if (zeroSequence > longestBitSequence)
+                        if (zeroSequence > longestInCurrentNumber)
                         {
-                            longestBitSequence = zeroSequence;
-                            numberWithLongestBitRun = numbers[i];
+                            longestInCurrentNumber = zeroSequence;
                         }
+                    }
+                    else if (numbers[i][j] == '1')
+                    {
                         oneSequence++;
                         zeroSequence = 0;
+
+                        if (oneSequence > longestInCurrentNumber)
+                        {
+                            longestInCurrentNumber = oneSequence;
+                        }
                     }
-
-                }
-                if (zeroSequence > longestBitSequence)
-                {
-                    longestBitSequence = zeroSequence;
-                    numberWithLongestBitRun = numbers[i];
-                }
-                if (oneSequence > longestBitSequence)
-                {
-                    longestBitSequence = oneSequence;
-                    numberWithLongestBitRun = numbers[i];
                 }
 
+                if (longestInCurrentNumber > longestBitSequence)
+                {
+                    longestBitSequence = longestInCurrentNumber;
+                    numbersWithLongestBitRun.Clear();
+                    numbersWithLongestBitRun.Add(numbers[i]);
+                }
+                else if (longestInCurrentNumber == longestBitSequence)
+                {
+                    numbersWithLongestBitRun.Add(numbers[i]);
+                }
             }
-           string msg = String.Format("Longest bit run: {0} ({1})", longestBitSequence, numberWithLongestBitRun);
+
+            string msg = string.Format(
+                "Longest bit sequence: {0} ({1})",
+                longestBitSequence,
+                string.Join(", ", numbersWithLongestBitRun));
+
             Console.WriteLine(msg);
         }
 
@@ -187,7 +190,12 @@ namespace Ex01_1
                     binaryNumbersDivededBy4.Add(binaryNumbers[i]);
                 }
             }
-            string msg = String.Format("Number of decimal values divisible by 4: {0} ({1})", numbersDevidedBy4, string.Join(", ", binaryNumbersDivededBy4));
+            string msg = numbersDevidedBy4 == 0
+                  ? string.Format("Number of decimal values divisible by 4: {0}", numbersDevidedBy4)
+                  : string.Format("Number of decimal values divisible by 4: {0} ({1})",
+                  numbersDevidedBy4,
+                  string.Join(", ", binaryNumbersDivededBy4));
+
             Console.WriteLine(msg);
         }
 
