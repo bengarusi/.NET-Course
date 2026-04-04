@@ -28,11 +28,18 @@ namespace Ex01_1
                 numbersWithBinary.Add((numbers[i], binaryNumbers[i]));
             }
             var sortedNumbers = numbersWithBinary.OrderByDescending(x => x.DecimalValue);
-            Console.WriteLine("Decimal numbers in descending order:");
+
+            List<string> formattedNumbers = new List<string>();
+
             foreach (var number in sortedNumbers)
             {
-                Console.WriteLine($"{number.DecimalValue} ({number.BinaryValue})");
+                formattedNumbers.Add(string.Format("{0} ({1})", number.DecimalValue, number.BinaryValue));
             }
+
+            Console.WriteLine(
+                string.Format("Decimal numbers in descending order: {0}",
+                string.Join(", ", formattedNumbers))
+            );
         }
         private static void average(int[] numbers)
         {
@@ -94,7 +101,8 @@ namespace Ex01_1
                 }
 
             }
-            String.Format("Longest bit run: {0} ({1})", longestBitSequence, numberWithLongestBitRun);
+           string msg = String.Format("Longest bit run: {0} ({1})", longestBitSequence, numberWithLongestBitRun);
+            Console.WriteLine(msg);
         }
 
 
@@ -102,17 +110,17 @@ namespace Ex01_1
         private static void numberOfOnesBits(string[] numbers)
         {
             int numberOfOnes = 0;
-            for (int i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < Globals.NumberOfBinaryNumbers; i++)
             {
                 for (int j = 0; j < Globals.BinaryNumberLength; j++)
                 {
-                    if (numbers[i][j] == 1)
+                    if (numbers[i][j] == '1')
                     {
                         numberOfOnes++;
                     }
                 }
             }
-            Console.WriteLine($"Total 1-bits:{numberOfOnes}");
+            Console.WriteLine($"Total 1-bits: {numberOfOnes}");
         }
 
         private static void getMostTransitions(string[] i_BinaryNumbers, int[] i_DecimalValues)
@@ -145,8 +153,8 @@ namespace Ex01_1
                     }
                 }
             }
-            String.Format("Number with the most transitions: {0} ({1}) ({2} transitions)", maxTransitionsDecimal,maxTransitionsBinary, maxTransitions);
-           
+            string msg = String.Format("Number with the most transitions: {0} ({1}) - {2} transitions", maxTransitionsDecimal,maxTransitionsBinary, maxTransitions);
+            Console.WriteLine(msg);
 
 
         }
@@ -179,7 +187,8 @@ namespace Ex01_1
                     binaryNumbersDivededBy4.Add(binaryNumbers[i]);
                 }
             }
-            String.Format("Number of decimal values divisible by 4: {0} ({1})", numbersDevidedBy4, binaryNumbersDivededBy4);
+            string msg = String.Format("Number of decimal values divisible by 4: {0} ({1})", numbersDevidedBy4, string.Join(", ", binaryNumbersDivededBy4));
+            Console.WriteLine(msg);
         }
 
     }
