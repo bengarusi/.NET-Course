@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex01_1
 {
     public class Validation
     {
-        public static bool InputValidateion(string i_BinaryNumber)
+        public static bool InputValidation(string i_BinaryNumber)
         {
-            if (i_BinaryNumber.Length != Globals.BinaryNumberLength)
+            bool isValid = true;
+
+            if (i_BinaryNumber.Length != Globals.k_BinaryNumberLength)
             {
                 Console.WriteLine("Invalid input, try again");
-                return false;
+                isValid = false;
             }
             else
             {
@@ -22,12 +20,13 @@ namespace Ex01_1
                     if (c != '0' && c != '1')
                     {
                         Console.WriteLine("Invalid input, try again");
-                        return false;
+                        isValid = false;
+                        break;
                     }
                 }
-
             }
-            return true;
+
+            return isValid;
         }
     }
 }
