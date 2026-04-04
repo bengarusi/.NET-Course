@@ -7,8 +7,8 @@ namespace Ex01_4
     {
         public static void AnalyzeInput(string i_UserInput)
         {
-            StringBuilder reportBuilder = new StringBuilder();
-            bool isPalindrome = Validation.IsPalindromeRecursive(i_UserInput);
+            StringBuilder    reportBuilder = new StringBuilder();
+            bool             isPalindrome = Validation.IsPalindromeRecursive(i_UserInput);
 
             if (isPalindrome)
             {
@@ -35,8 +35,8 @@ namespace Ex01_4
             }
             else if (Validation.IsUserInputEnglishLetters(i_UserInput))
             {
-                int upperLetterCounter = 0;
-                bool isDescending = true;
+                int     upperLetterCounter = 0;
+                bool    isDescending = true;
 
                 for (int i = 0; i < i_UserInput.Length; i++)
                 {

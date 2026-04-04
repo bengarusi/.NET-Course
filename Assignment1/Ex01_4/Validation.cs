@@ -4,11 +4,12 @@ namespace Ex01_4
 {
     public class Validation
     {
+        const int k_MaximumDesiredLength = 8;
         public static bool ValidateInput(string i_UserInput)
         {
             bool isValid = true;
 
-            if (string.IsNullOrEmpty(i_UserInput) || i_UserInput.Length != 8)
+            if (string.IsNullOrEmpty(i_UserInput) || i_UserInput.Length != k_MaximumDesiredLength)
             {
                 isValid = false;
             }
@@ -50,8 +51,8 @@ namespace Ex01_4
 
         public static bool IsPalindromeRecursive(string i_UserInput)
         {
-            bool isPalindromeResult = true;
-            string upperInput = i_UserInput.ToUpper();
+            bool     isPalindromeResult = true;
+            string   upperInput = i_UserInput.ToUpper();
 
             if (upperInput.Length <= 1)
             {

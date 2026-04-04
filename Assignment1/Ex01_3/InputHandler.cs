@@ -9,11 +9,11 @@ namespace Ex01_3
         {
             
             int height;
-            Console.Write($"Please enter tree height({k_MinHeight}-{k_MaxHeight}):");
+            Console.Write(string.Format("Please enter tree height({0}-{1}):", k_MinHeight, k_MaxHeight));
 
             while (!isValidInput(Console.ReadLine(), out height))
             {
-                Console.WriteLine($"Invalid input. Please enter a number between {k_MinHeight} and {k_MaxHeight}.");
+                Console.WriteLine(string.Format("Invalid input. Please enter a number between {0} and {1}.", k_MinHeight, k_MaxHeight));
                 Console.Write("Try again: ");
             }
 
