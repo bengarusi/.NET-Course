@@ -3,7 +3,8 @@
 namespace Ex01_1
 {
     public class Program
-    {
+    {  
+
         public static void Main()
         {
             string[] binaryNumbers = new string[Globals.k_AmountOfNumbers];

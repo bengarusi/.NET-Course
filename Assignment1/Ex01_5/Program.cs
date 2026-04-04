@@ -11,7 +11,6 @@ namespace Ex01_5
 
             while (!Validation.ValidateInput(userInput))
             {
-                Console.WriteLine("Invalid input, please try again (9 digits exactly):");
                 userInput = Console.ReadLine();
             }
 

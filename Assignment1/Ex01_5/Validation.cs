@@ -10,6 +10,7 @@ namespace Ex01_5
 
             if (string.IsNullOrEmpty(i_UserInput) || i_UserInput.Length != 9)
             {
+                Console.WriteLine("Invalid input, please try again (9 digits number exectly)");
                 isValid = false;
             }
             else
@@ -18,12 +19,15 @@ namespace Ex01_5
                 {
                     if (!char.IsDigit(c))
                     {
+                        Console.WriteLine("Invalid input, please try again (only digits)");
                         isValid = false;
                         break;
                     }
                 }
             }
 
+        
+           
             return isValid;
         }
     }
