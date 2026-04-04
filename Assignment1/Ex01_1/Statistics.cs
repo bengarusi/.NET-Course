@@ -1,0 +1,186 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ex01_1
+{
+    internal class Statistics
+    {
+
+        public static void PrintStatistics(string[] i_BinaryNumbers, int[] i_DecimalValues)
+        {
+           printNumbersByDescending(i_DecimalValues, i_BinaryNumbers);
+            average(i_DecimalValues);
+            longestBitRun(i_BinaryNumbers);
+            numberOfOnesBits(i_BinaryNumbers);
+            getMostTransitions(i_BinaryNumbers, i_DecimalValues);
+            numbersDevidedBy4(i_DecimalValues, i_BinaryNumbers);
+           
+        }
+
+        private static void printNumbersByDescending(int[] numbers, string[] binaryNumbers)
+        {
+            List<(int DecimalValue, string BinaryValue)> numbersWithBinary = new List<(int DecimalValue, string BinaryValue)>();
+            for (int i = 0; i < Globals.NumberOfBinaryNumbers; i++)
+            {
+                numbersWithBinary.Add((numbers[i], binaryNumbers[i]));
+            }
+            var sortedNumbers = numbersWithBinary.OrderByDescending(x => x.DecimalValue);
+            Console.WriteLine("Decimal numbers in descending order:");
+            foreach (var number in sortedNumbers)
+            {
+                Console.WriteLine($"{number.DecimalValue} ({number.BinaryValue})");
+            }
+        }
+        private static void average(int[] numbers)
+        {
+            float sum = 0;
+            for (int i = 0; i < Globals.NumberOfBinaryNumbers; i++)
+            {
+                sum += numbers[i];
+            }
+            Console.WriteLine($"Average: {sum / numbers.Length}");
+        }
+
+
+        private static void longestBitRun(string[] numbers)
+        {
+
+            string numberWithLongestBitRun = "";
+            int longestBitSequence = 1;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+
+                int zeroSequence = 0;
+                int oneSequence = 0;
+
+                for (int j = 0; j < Globals.BinaryNumberLength; j++)
+                {
+                    if (numbers[i][j] == '0')
+                    {
+                        if (oneSequence > longestBitSequence)
+                        {
+                            longestBitSequence = oneSequence;
+                            numberWithLongestBitRun = numbers[i];
+                        }
+
+                        zeroSequence++;
+                        oneSequence = 0;
+                    }
+
+                    if (numbers[i][j] == '1')
+                    {
+                        if (zeroSequence > longestBitSequence)
+                        {
+                            longestBitSequence = zeroSequence;
+                            numberWithLongestBitRun = numbers[i];
+                        }
+                        oneSequence++;
+                        zeroSequence = 0;
+                    }
+
+                }
+                if (zeroSequence > longestBitSequence)
+                {
+                    longestBitSequence = zeroSequence;
+                    numberWithLongestBitRun = numbers[i];
+                }
+                if (oneSequence > longestBitSequence)
+                {
+                    longestBitSequence = oneSequence;
+                    numberWithLongestBitRun = numbers[i];
+                }
+
+            }
+            String.Format("Longest bit run: {0} ({1})", longestBitSequence, numberWithLongestBitRun);
+        }
+
+
+
+        private static void numberOfOnesBits(string[] numbers)
+        {
+            int numberOfOnes = 0;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                for (int j = 0; j < Globals.BinaryNumberLength; j++)
+                {
+                    if (numbers[i][j] == 1)
+                    {
+                        numberOfOnes++;
+                    }
+                }
+            }
+            Console.WriteLine($"Total 1-bits:{numberOfOnes}");
+        }
+
+        private static void getMostTransitions(string[] i_BinaryNumbers, int[] i_DecimalValues)
+        {
+            int maxTransitions = -1;
+            string maxTransitionsBinary = "";
+            int maxTransitionsDecimal = 0;
+
+            for (int i = 0; i < Globals.NumberOfBinaryNumbers; i++)
+            {
+                int transitions = countTransitions(i_BinaryNumbers[i]);
+                bool isNewMax = transitions >= maxTransitions;
+
+                if (isNewMax)
+                {
+                    if (transitions == maxTransitions)
+                    {
+                        if (i_DecimalValues[i] < maxTransitionsDecimal)
+                        {
+                            maxTransitions = transitions;
+                            maxTransitionsBinary = i_BinaryNumbers[i];
+                            maxTransitionsDecimal = i_DecimalValues[i];
+                        }
+                    }
+                    else
+                    {
+                        maxTransitions = transitions;
+                        maxTransitionsBinary = i_BinaryNumbers[i];
+                        maxTransitionsDecimal = i_DecimalValues[i];
+                    }
+                }
+            }
+            String.Format("Number with the most transitions: {0} ({1}) ({2} transitions)", maxTransitionsDecimal,maxTransitionsBinary, maxTransitions);
+           
+
+
+        }
+
+        private static int countTransitions(string i_Binary)
+        {
+            int transitions = 0;
+
+            for (int i = 1; i < Globals.BinaryNumberLength; i++)
+            {
+                bool isBitChanged = i_Binary[i] != i_Binary[i - 1];
+
+                if (isBitChanged)
+                {
+                    transitions++;
+                }
+            }
+
+            return transitions;
+        }
+        private static void numbersDevidedBy4(int[] numbers, string[] binaryNumbers)
+        {
+            int numbersDevidedBy4 = 0;
+            List<string> binaryNumbersDivededBy4 = new List<string>();
+            for (int i = 0; i < Globals.NumberOfBinaryNumbers; i++)
+            {
+                if (numbers[i] % 4 == 0)
+                {
+                    numbersDevidedBy4++;
+                    binaryNumbersDivededBy4.Add(binaryNumbers[i]);
+                }
+            }
+            String.Format("Number of decimal values divisible by 4: {0} ({1})", numbersDevidedBy4, binaryNumbersDivededBy4);
+        }
+
+    }
+}
