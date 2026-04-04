@@ -1,25 +1,23 @@
 ﻿using System;
 
-namespace Ex01_1
+namespace Ex01_5
 {
     public class Validation
     {
-        public static bool InputValidation(string i_BinaryNumber)
+        public static bool ValidateInput(string i_UserInput)
         {
             bool isValid = true;
 
-            if (i_BinaryNumber.Length != Globals.k_BinaryNumberLength)
+            if (string.IsNullOrEmpty(i_UserInput) || i_UserInput.Length != 9)
             {
-                Console.WriteLine("Invalid input, try again");
                 isValid = false;
             }
             else
             {
-                foreach (char c in i_BinaryNumber)
+                foreach (char c in i_UserInput)
                 {
-                    if (c != '0' && c != '1')
+                    if (!char.IsDigit(c))
                     {
-                        Console.WriteLine("Invalid input, try again");
                         isValid = false;
                         break;
                     }
