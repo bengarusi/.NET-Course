@@ -2,12 +2,14 @@
 
 namespace Ex01_4
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
+            string userInput;
+
             Console.WriteLine("Please enter a string of 8 characters: ");
-            string userInput = Console.ReadLine();
+            userInput = Console.ReadLine();
 
             while (!Validation.ValidateInput(userInput))
             {

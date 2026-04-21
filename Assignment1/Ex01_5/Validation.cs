@@ -25,8 +25,6 @@ namespace Ex01_5
                     }
                 }
             }
-
-        
            
             return isValid;
         }

@@ -54,8 +54,8 @@ namespace Ex01_1
 
         private static void printLongestBitRun(string[] i_Numbers)
         {
-            List<string> numbersWithLongestBitRun = new List<string>();
-            int longestBitSequence = 1;
+            List<string>   numbersWithLongestBitRun = new List<string>();
+            int            longestBitSequence = 1;
 
             for (int i = 0; i < i_Numbers.Length; i++)
             {
@@ -122,9 +122,9 @@ namespace Ex01_1
 
         private static void printMostTransitions(string[] i_BinaryNumbers, int[] i_DecimalValues)
         {
-            int maxTransitions = -1;
-            string maxTransitionsBinary = string.Empty;
-            int maxTransitionsDecimal = 0;
+            int      maxTransitions = -1;
+            string   maxTransitionsBinary = string.Empty;
+            int      maxTransitionsDecimal = 0;
 
             for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
@@ -168,8 +168,8 @@ namespace Ex01_1
 
         private static void printNumbersDividedBy4(int[] i_Numbers, string[] i_BinaryNumbers)
         {
-            int countDividedBy4 = 0;
-            List<string> binaryMatches = new List<string>();
+            int             countDividedBy4 = 0;
+            List<string>    binaryMatches = new List<string>();
 
             for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
