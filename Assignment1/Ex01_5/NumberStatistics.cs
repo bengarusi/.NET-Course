@@ -43,7 +43,7 @@ namespace Ex01_5
             {
                 int currentDigit = (int)char.GetNumericValue(i_Number[i]);
 
-                if (currentDigit != 0 && currentDigit % 4 == 0)
+                if (currentDigit % 4 == 0)
                 {
                     count++;
                 }

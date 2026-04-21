@@ -8,11 +8,11 @@ namespace Ex01_1
         {
             int decimalNumber = 0;
 
-            for (int i = 0; i < Globals.k_BinaryNumberLength; i++)
+            for (int i = 0; i < Program.k_BinaryNumberLength; i++)
             {
                 if (i_BinaryNumber[i] == '1')
                 {
-                    decimalNumber += (int)Math.Pow(2, Globals.k_BinaryNumberLength - 1 - i);
+                    decimalNumber += (int)Math.Pow(2, Program.k_BinaryNumberLength - 1 - i);
                 }
             }
 

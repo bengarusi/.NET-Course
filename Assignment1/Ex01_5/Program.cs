@@ -15,7 +15,6 @@ namespace Ex01_5
             }
 
             NumberStatistics.PrintStatistics(userInput);
-            Console.ReadLine();
         }
     }
 }

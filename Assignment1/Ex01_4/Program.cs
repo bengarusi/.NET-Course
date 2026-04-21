@@ -16,7 +16,6 @@ namespace Ex01_4
             }
 
             InputAnalyzer.AnalyzeInput(userInput);
-            Console.ReadLine();
         }
     }
 }

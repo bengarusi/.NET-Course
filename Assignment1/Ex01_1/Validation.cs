@@ -8,7 +8,7 @@ namespace Ex01_1
         {
             bool isValid = true;
 
-            if (i_BinaryNumber.Length != Globals.k_BinaryNumberLength)
+            if (i_BinaryNumber.Length != Program.k_BinaryNumberLength)
             {
                 Console.WriteLine("Invalid input, try again");
                 isValid = false;

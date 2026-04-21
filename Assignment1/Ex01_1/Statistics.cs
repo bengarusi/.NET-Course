@@ -20,7 +20,7 @@ namespace Ex01_1
         {
             List<(int DecimalValue, string BinaryValue)> numbersWithBinary = new List<(int DecimalValue, string BinaryValue)>();
 
-            for (int i = 0; i < Globals.k_AmountOfNumbers; i++)
+            for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
                 numbersWithBinary.Add((i_Numbers[i], i_BinaryNumbers[i]));
             }
@@ -42,12 +42,12 @@ namespace Ex01_1
         {
             float sum = 0;
 
-            for (int i = 0; i < Globals.k_AmountOfNumbers; i++)
+            for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
                 sum += i_Numbers[i];
             }
 
-            string msg = string.Format("Average: {0:f2}", sum / Globals.k_AmountOfNumbers);
+            string msg = string.Format("Average: {0:f2}", sum / Program.k_AmountOfNumbers);
 
             Console.WriteLine(msg);
         }
@@ -63,7 +63,7 @@ namespace Ex01_1
                 int oneSequence = 0;
                 int longestInCurrentNumber = 1;
 
-                for (int j = 0; j < Globals.k_BinaryNumberLength; j++)
+                for (int j = 0; j < Program.k_BinaryNumberLength; j++)
                 {
                     if (i_Numbers[i][j] == '0')
                     {
@@ -106,9 +106,9 @@ namespace Ex01_1
         {
             int numberOfOnes = 0;
 
-            for (int i = 0; i < Globals.k_AmountOfNumbers; i++)
+            for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
-                for (int j = 0; j < Globals.k_BinaryNumberLength; j++)
+                for (int j = 0; j < Program.k_BinaryNumberLength; j++)
                 {
                     if (i_Numbers[i][j] == '1')
                     {
@@ -126,7 +126,7 @@ namespace Ex01_1
             string maxTransitionsBinary = string.Empty;
             int maxTransitionsDecimal = 0;
 
-            for (int i = 0; i < Globals.k_AmountOfNumbers; i++)
+            for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
                 int currentTransitions = countTransitions(i_BinaryNumbers[i]);
 
@@ -155,7 +155,7 @@ namespace Ex01_1
         {
             int transitionsCount = 0;
 
-            for (int i = 1; i < Globals.k_BinaryNumberLength; i++)
+            for (int i = 1; i < Program.k_BinaryNumberLength; i++)
             {
                 if (i_Binary[i] != i_Binary[i - 1])
                 {
@@ -171,7 +171,7 @@ namespace Ex01_1
             int countDividedBy4 = 0;
             List<string> binaryMatches = new List<string>();
 
-            for (int i = 0; i < Globals.k_AmountOfNumbers; i++)
+            for (int i = 0; i < Program.k_AmountOfNumbers; i++)
             {
                 if (i_Numbers[i] % 4 == 0)
                 {
