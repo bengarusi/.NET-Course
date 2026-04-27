@@ -6,8 +6,10 @@ namespace Ex01_5
     {
         public static void Main()
         {
+            string userInput;
+
             Console.WriteLine("Please enter a 9-digit number:");
-            string userInput = Console.ReadLine();
+            userInput = Console.ReadLine();
 
             while (!Validation.ValidateInput(userInput))
             {
