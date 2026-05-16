@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EX2
+﻿namespace EX2
 {
     public struct PlayerMove
     {
@@ -19,7 +15,7 @@ namespace EX2
             return Row;
         }
         public int GetColumn()
-        { 
+        {
             return Column;
         }
     }

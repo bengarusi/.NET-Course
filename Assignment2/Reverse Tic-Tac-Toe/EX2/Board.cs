@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EX2
+﻿namespace EX2
 {
     internal class Board
     {

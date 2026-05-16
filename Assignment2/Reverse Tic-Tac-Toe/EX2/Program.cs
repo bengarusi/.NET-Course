@@ -2,7 +2,7 @@
 
 
 public class Program
-{ 
+{
     public static void Main(string[] args)
     {
 
@@ -10,6 +10,6 @@ public class Program
         game.Start();
         game.ChooseOpponent();
         game.GamePlay();
-        
+
     }
 }
