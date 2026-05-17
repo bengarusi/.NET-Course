@@ -1,6 +1,6 @@
 ﻿namespace EX2
 {
-    internal class Board
+    public class Board
     {
         private readonly int Size;
         private string[][] m_board;
