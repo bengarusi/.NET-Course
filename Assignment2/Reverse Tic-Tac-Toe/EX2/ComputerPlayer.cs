@@ -1,6 +1,6 @@
 ﻿namespace EX2
 {
-    internal class ComputerPlayer
+    public class ComputerPlayer
     {
         Board m_GameBoard;
 
