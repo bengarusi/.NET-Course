@@ -76,8 +76,14 @@
 
             for (int i = 0; i < m_Size; i++)
             {
-                if (m_Board[i][i] != i_PlayerSymbol) { mainDiag = false; }
-                if (m_Board[i][m_Size - 1 - i] != i_PlayerSymbol) { antiDiag = false; }
+                if (m_Board[i][i] != i_PlayerSymbol) 
+                {
+                    mainDiag = false;
+                }
+                if (m_Board[i][m_Size - 1 - i] != i_PlayerSymbol)
+                { 
+                    antiDiag = false;
+                }
             }
 
             return mainDiag || antiDiag;
