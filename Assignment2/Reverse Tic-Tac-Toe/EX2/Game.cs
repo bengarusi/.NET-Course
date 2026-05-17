@@ -1,6 +1,6 @@
 ﻿namespace EX2
 {
-    internal class Game
+    public class Game
     {
         public Board m_GameBoard;
         public ComputerPlayer m_ComputerOpponent;
