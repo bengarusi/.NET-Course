@@ -1,166 +1,105 @@
 ﻿namespace EX2
 {
-    internal class Board
+    public class Board
     {
-        private readonly int Size;
-        private string[][] m_board;
+        private readonly int m_Size;
+        private string[][] m_Board;
         private int m_HowManyCellsAreFilled = 0;
 
-        public Board(int i_size)
+        public Board(int i_Size)
         {
-            Size = i_size;
-            m_board = new string[Size][];
-            for (int i = 0; i < Size; i++)
+            m_Size = i_Size;
+            m_Board = new string[m_Size][];
+
+            for (int i = 0; i < m_Size; i++)
             {
-                m_board[i] = new string[Size];
+                m_Board[i] = new string[m_Size];
             }
         }
 
-
-        public void PrintBoard()
+        public bool UpdateBoard(PlayerMove i_Move, int i_Player)
         {
+            bool isUpdateSuccessful = false;
+            int row = i_Move.Row - 1;
+            int col = i_Move.Column - 1;
 
-            for (int i = 0; i < Size; i++)
+            if (row >= 0 && row < m_Size && col >= 0 && col < m_Size)
             {
-                if (i == 0)
+                if (m_Board[row][col] == null)
                 {
-                    Console.Write("     ");
-                    Console.Write(i + 1 + "   ");
-                }
-                else
-                {
-                    Console.Write(i + 1 + "   ");
+                    m_Board[row][col] = i_Player == 1 ? "X" : "O";
+                    m_HowManyCellsAreFilled++;
+                    isUpdateSuccessful = true;
                 }
             }
 
-            Console.WriteLine();
+            return isUpdateSuccessful;
+        }
 
-            for (int i = 0; i < Size; i++)
+        public bool CheckWin(int i_PlayerNumber)
+        {
+            bool isWin = false;
+            string playerSymbol = i_PlayerNumber == 1 ? "X" : "O";
+
+            for (int i = 0; i < m_Size && !isWin; i++)
             {
-                Console.Write(i + 1 + "  ");
-                for (int j = 0; j < Size; j++)
+                bool rowWin = true;
+                bool colWin = true;
+
+                for (int j = 0; j < m_Size; j++)
                 {
-                    Console.Write("| ");
-                    Console.Write(m_board[i][j] == null ? " " : m_board[i][j]);
-                    Console.Write(" ");
-                    if (j + 1 == Size)
+                    if (m_Board[i][j] != playerSymbol)
                     {
-                        Console.Write("|");
+                        rowWin = false;
+                    }
+                    if (m_Board[j][i] != playerSymbol)
+                    {
+                        colWin = false; 
                     }
                 }
-                Console.WriteLine();
-                Console.Write("   ");
-                for (int j = 0; j < Size; j++)
-                {
-                    Console.Write("====");
-                }
-                Console.WriteLine();
+
+                isWin = rowWin || colWin;
             }
-            Console.WriteLine();
+
+            if (!isWin)
+            {
+                isWin = checkDiagonals(playerSymbol);
+            }
+
+            return isWin;
         }
 
-        public bool UpdateBoard(int i_row, int i_col, int i_player)
+        private bool checkDiagonals(string i_PlayerSymbol)
         {
-            if (i_row < 1 || i_row > Size || i_col < 1 || i_col > Size)
+            bool mainDiag = true;
+            bool antiDiag = true;
+
+            for (int i = 0; i < m_Size; i++)
             {
-                Console.WriteLine("Invalid move. Row and column must be between 1 and " + Size);
-                return false;
+                if (m_Board[i][i] != i_PlayerSymbol) { mainDiag = false; }
+                if (m_Board[i][m_Size - 1 - i] != i_PlayerSymbol) { antiDiag = false; }
             }
 
-            if (!IsCellEmpty(i_row - 1, i_col - 1))
-            {
-                Console.WriteLine("Invalid move. Cell is already occupied.");
-                return false;
-            }
-            m_board[i_row - 1][i_col - 1] = i_player == 1 ? "X" : "O";
-            m_HowManyCellsAreFilled++;
-            PrintBoard();
-            return true;
+            return mainDiag || antiDiag;
         }
 
+        public string GetCellSymbol(int i_Row, int i_Col)
+        {
+            string symbol = m_Board[i_Row][i_Col] ?? " ";
+
+            return symbol;
+        }
 
         public bool IsBoardFull()
         {
-            return m_HowManyCellsAreFilled == Size * Size;
+            bool isFull = m_HowManyCellsAreFilled == m_Size * m_Size;
+
+            return isFull;
         }
 
         public int GetSize()
         {
-            return Size;
-        }
-
-        public bool IsCellEmpty(int i_row, int i_col)
-        {
-            return m_board[i_row][i_col] == null;
-        }
-
-        public bool CheckWin(int i_playerNumber)
-        {
-            string playerSymbol = i_playerNumber == 1 ? "X" : "O";
-            // Check rows
-            for (int i = 0; i < Size; i++)
-            {
-                bool rowWin = true;
-                for (int j = 0; j < Size; j++)
-                {
-                    if (m_board[i][j] != playerSymbol)
-                    {
-                        rowWin = false;
-                        break;
-                    }
-                }
-
-                if (rowWin)
-                {
-                    return true;
-                }
-            }
-
-            // Check columns
-            for (int j = 0; j < Size; j++)
-            {
-                bool colWin = true;
-                for (int i = 0; i < Size; i++)
-                {
-                    if (m_board[i][j] != playerSymbol)
-                    {
-                        colWin = false;
-                        break;
-                    }
-                }
-                if (colWin)
-                {
-                    return true;
-                }
-            }
-
-            // Check main diagonal
-            bool mainDiagonalWin = true;
-            for (int i = 0; i < Size; i++)
-            {
-                if (m_board[i][i] != playerSymbol)
-                {
-                    mainDiagonalWin = false;
-                    break;
-                }
-            }
-
-            if (mainDiagonalWin)
-            {
-                return true;
-            }
-            // Check anti-diagonal
-            bool antiDiagonalWin = true;
-            for (int i = 0; i < Size; i++)
-            {
-                if (m_board[i][Size - 1 - i] != playerSymbol)
-                {
-                    antiDiagonalWin = false;
-                    break;
-                }
-            }
-
-            return antiDiagonalWin;
+            return m_Size;
         }
     }
 }

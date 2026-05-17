@@ -1,15 +1,12 @@
-﻿using EX2;
-
+﻿using System;
+using EX2;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
-
         Game game = new Game();
-        game.Start();
-        game.ChooseOpponent();
-        game.GamePlay();
 
+        game.Start();
     }
 }

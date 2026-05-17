@@ -1,166 +1,178 @@
-﻿namespace EX2
+﻿using System;
+using Ex02.ConsoleUtils;
+
+namespace EX2
 {
-    internal class Game
+    public class Game
     {
-        public Board m_GameBoard;
-        public ComputerPlayer m_ComputerOpponent;
-        private int m_Opponent;
-        private int m_OppenentScore = 0;
+        private Board m_GameBoard;
+        private ComputerPlayer m_ComputerOpponent;
+        private int m_OpponentType;
+        private int m_OpponentScore = 0;
         private int m_PlayerScore = 0;
         public readonly static int k_ComputerPlayerNumber = 9;
-        private readonly int k_HumanPlayerNumber = 2;
 
         public void Start()
         {
             int boardSize = 0;
-            bool isValidInput = false;
 
-            while (!isValidInput)
+            Console.WriteLine("Enter board size between 3 and 9:");
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out boardSize) || boardSize < 3 || boardSize > 9)
             {
-                Console.WriteLine("Enter board size between 3 and 9:");
-                string input = Console.ReadLine();
-
-                if (int.TryParse(input, out boardSize) && boardSize >= 3 && boardSize <= 9)
-                {
-                    isValidInput = true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a number between 3 and 9.");
-                }
+                Console.WriteLine("Invalid input. Please enter a number between 3 and 9.");
+                input = Console.ReadLine();
             }
-            m_GameBoard = new Board(boardSize);
 
+            m_GameBoard = new Board(boardSize);
+            chooseOpponent();
+            GamePlay();
         }
 
-        public void ChooseOpponent()
+        private void chooseOpponent()
         {
-            Console.WriteLine("Play Against:");
-            Console.WriteLine("1. Computer");
-            Console.WriteLine("2. Another Player");
-            string opponentChoice = Console.ReadLine();
-            while (opponentChoice != "1" && opponentChoice != "2")
+            Console.WriteLine("Play Against:\n1. Computer\n2. Another Player");
+            string choice = Console.ReadLine();
+
+            while (choice != "1" && choice != "2")
             {
                 Console.WriteLine("Invalid choice. Please enter 1 or 2.");
-                opponentChoice = Console.ReadLine();
+                choice = Console.ReadLine();
             }
-            m_GameBoard.PrintBoard();
-            if (opponentChoice == "1")
+
+            m_OpponentType = (choice == "1") ? k_ComputerPlayerNumber : 2;
+            if (m_OpponentType == k_ComputerPlayerNumber)
             {
                 m_ComputerOpponent = new ComputerPlayer(m_GameBoard);
-                m_Opponent = k_ComputerPlayerNumber;
             }
-            else
-            {
-                m_Opponent = 1;
-            }
-
-
-
         }
 
-        public bool PlayTurn(int i_playerNumber)
+        public void PrintBoard()
         {
-            if (i_playerNumber == k_ComputerPlayerNumber)
-            {
-                m_ComputerOpponent.MakeMove();
-                return false;
-            }
-            else
-            {
-                bool isValidMove = false;
-                while (!isValidMove)
-                {
-                    if (m_GameBoard.IsBoardFull())
-                    {
-                        Console.WriteLine("The game is a draw!");
-                        return true;
-                    }
+            Screen.Clear();
+            int size = m_GameBoard.GetSize();
 
-                    Console.WriteLine($"Player {i_playerNumber}'s turn. Enter your row");
-                    string PlayerMoveRow = Console.ReadLine();
-                    Console.WriteLine($"Player {i_playerNumber}'s turn. Enter your collumn");
-                    string PlayerMoveCollumn = Console.ReadLine();
-                    isValidMove = m_GameBoard.UpdateBoard(int.Parse(PlayerMoveRow), int.Parse(PlayerMoveCollumn), i_playerNumber);
+            Console.Write("    ");
+            for (int i = 1; i <= size; i++)
+            {
+                Console.Write(string.Format("{0}   ", i));
+            }
+            Console.WriteLine();
+
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write(string.Format("{0} |", i + 1));
+                for (int j = 0; j < size; j++)
+                {
+                    Console.Write(string.Format(" {0} |", m_GameBoard.GetCellSymbol(i, j)));
+                }
+                Console.WriteLine("\n  " + new string('=', size * 4 + 1));
+            }
+        }
+
+        private bool getAndValidateMove(int i_PlayerNumber)
+        {
+            bool isQuit = false;
+            bool isValidMove = false;
+
+            while (!isValidMove && !isQuit)
+            {
+                Console.WriteLine(string.Format("Player {0}'s turn. Enter row (or Q to quit):", i_PlayerNumber));
+                string rowInput = Console.ReadLine();
+                if (rowInput.ToUpper() == "Q") 
+                {
+                    isQuit = true; break; 
+                }
+
+                Console.WriteLine(string.Format("Player {0}'s turn. Enter column (or Q to quit):", i_PlayerNumber));
+                string colInput = Console.ReadLine();
+                if (colInput.ToUpper() == "Q")
+                {
+                    isQuit = true; break;
+                }
+
+                int row, col;
+                if (int.TryParse(rowInput, out row) && int.TryParse(colInput, out col))
+                {
+                    if (row < 1 || row > m_GameBoard.GetSize() || col < 1 || col > m_GameBoard.GetSize())
+                    {
+                        Console.WriteLine(string.Format("Invalid move. Row and column must be between 1 and {0}", m_GameBoard.GetSize()));
+                    }
+                    else if (m_GameBoard.GetCellSymbol(row - 1, col - 1) != " ")
+                    {
+                        Console.WriteLine("Invalid move. Cell is already occupied.");
+                    }
+                    else
+                    {
+                        isValidMove = m_GameBoard.UpdateBoard(new PlayerMove(row, col), i_PlayerNumber);
+                    }
+                }
+                else 
+                {
+                    Console.WriteLine("Invalid input. Please enter numbers only.");
                 }
             }
-            return false;
+
+            return isQuit;
         }
 
         public void GamePlay()
         {
-            int playerNumber = 1;
+            int currentPlayer = 1;
             bool isGameOver = false;
-            bool againstComputer = m_Opponent == k_ComputerPlayerNumber;
 
             while (!isGameOver)
             {
-                isGameOver = PlayTurn(playerNumber);
-                if (m_GameBoard.CheckWin(playerNumber))
+                PrintBoard();
+                if (currentPlayer == k_ComputerPlayerNumber)
                 {
-                    Console.WriteLine("Game Over!\n");
-
-                    if (playerNumber != k_ComputerPlayerNumber && playerNumber != k_HumanPlayerNumber)
-                    {
-                        Console.WriteLine("You win!\n");
-                        m_PlayerScore++;
-                    }
-                    else
-                    {
-                        Console.WriteLine("You lose!\n");
-                        m_OppenentScore++;
-                    }
-
-                    isGameOver = true;
-                }
-
-                if (playerNumber == 1)
-                {
-                    if (againstComputer)
-                    {
-                        playerNumber = k_ComputerPlayerNumber;
-                    }
-                    else
-                    {
-                        playerNumber = k_HumanPlayerNumber;
-                    }
+                    PlayerMove compMove = m_ComputerOpponent.GetMove();
+                    Console.WriteLine(string.Format("\nComputer player move: row {0}, column {1}\n", compMove.Row, compMove.Column));
+                    m_GameBoard.UpdateBoard(compMove, k_ComputerPlayerNumber);
                 }
                 else
                 {
-                    playerNumber = 1;
+                    isGameOver = getAndValidateMove(currentPlayer);
                 }
+
+                if (!isGameOver && m_GameBoard.CheckWin(currentPlayer))
+                {
+                    PrintBoard();
+                    Console.WriteLine(string.Format("Game Over! Player {0} hit a sequence and LOST!", currentPlayer));
+                    updateScores(currentPlayer);
+                    isGameOver = true;
+                }
+                else if (!isGameOver && m_GameBoard.IsBoardFull())
+                {
+                    PrintBoard();
+                    Console.WriteLine("The game is a draw!");
+                    isGameOver = true;
+                }
+
+                currentPlayer = (currentPlayer == 1) ? m_OpponentType : 1;
             }
-
-            Console.WriteLine($"Player Score: {m_PlayerScore}");
-            Console.WriteLine($"Opponent Score: {m_OppenentScore}\n");
-
-            ResetGame();
-
+            resetGame();
         }
 
-
-        public void ResetGame()
+        private void updateScores(int i_LosingPlayer)
         {
+            if (i_LosingPlayer == 1) { m_OpponentScore++; }
+            else { m_PlayerScore++; }
+        }
+
+        private void resetGame()
+        {
+            Console.WriteLine(string.Format("Scores -> You: {0}, Opponent: {1}", m_PlayerScore, m_OpponentScore));
             Console.WriteLine("Do you want to play again? (y/n)");
-            string playAgain = Console.ReadLine();
-            if (playAgain.ToLower() == "y")
+            if (Console.ReadLine().ToLower() == "y")
             {
                 m_GameBoard = new Board(m_GameBoard.GetSize());
-                if (m_Opponent == k_ComputerPlayerNumber)
-                {
-                    m_ComputerOpponent = new ComputerPlayer(m_GameBoard);
-                }
-
-                m_GameBoard.PrintBoard();
                 GamePlay();
             }
-            else
+            else 
             {
                 Console.WriteLine("\nThanks for playing!");
             }
         }
-
-
-
     }
 }
