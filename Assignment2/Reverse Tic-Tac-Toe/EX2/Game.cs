@@ -156,8 +156,14 @@ namespace EX2
 
         private void updateScores(int i_LosingPlayer)
         {
-            if (i_LosingPlayer == 1) { m_OpponentScore++; }
-            else { m_PlayerScore++; }
+            if (i_LosingPlayer == 1)
+            {
+                m_OpponentScore++;
+            }
+            else
+            {
+                m_PlayerScore++;
+            }
         }
 
         private void resetGame()
