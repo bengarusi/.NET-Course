@@ -81,14 +81,16 @@ namespace EX2
                 string rowInput = Console.ReadLine();
                 if (rowInput.ToUpper() == "Q") 
                 {
-                    isQuit = true; break; 
+                    isQuit = true;
+                    break; 
                 }
 
                 Console.WriteLine(string.Format("Player {0}'s turn. Enter column (or Q to quit):", i_PlayerNumber));
                 string colInput = Console.ReadLine();
                 if (colInput.ToUpper() == "Q")
                 {
-                    isQuit = true; break;
+                    isQuit = true;
+                    break;
                 }
 
                 int row, col;
