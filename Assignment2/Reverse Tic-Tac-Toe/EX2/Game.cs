@@ -172,7 +172,7 @@ namespace EX2
         {
             Console.WriteLine(string.Format("Scores -> You: {0}, Opponent: {1}", m_PlayerScore, m_OpponentScore));
             Console.WriteLine("Do you want to play again? (y/n)");
-            if (Console.ReadLine().ToLower() == "y")
+            if (Console.ReadLine() == "y" || Console.ReadLine() == "Y")
             {
                 m_GameBoard = new Board(m_GameBoard.GetSize());
                 GamePlay();
