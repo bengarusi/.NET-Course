@@ -1,4 +1,4 @@
-﻿namespace EX2
+﻿namespace Ex02
 {
     public class Board
     {
@@ -15,8 +15,8 @@
         public bool UpdateBoard(PlayerMove i_Move, int i_Player)
         {
             bool isUpdateSuccessful = false;
-            int row = i_Move.Row - 1;
-            int col = i_Move.Column - 1;
+            int row = i_Move.GetRow() - 1;
+            int col = i_Move.GetColumn() - 1;
 
             if (row >= 0 && row < m_Size && col >= 0 && col < m_Size)
             {
@@ -31,7 +31,7 @@
             return isUpdateSuccessful;
         }
 
-        public bool CheckWin(int i_PlayerNumber)
+        public bool CheckIfSequel(int i_PlayerNumber)
         {
             bool isWin = false;
             string playerSymbol = i_PlayerNumber == 1 ? "X" : "O";
@@ -102,5 +102,21 @@
         {
             return m_Size;
         }
+
+        public void ClearCell(PlayerMove i_PlayerMove)
+        { 
+            int row = i_PlayerMove.GetRow() - 1;
+            int col = i_PlayerMove.GetColumn() - 1;
+            
+            if (row >= 0 && row < m_Size && col >= 0 && col < m_Size)
+            {
+                if (m_Board[row, col] != null)
+                {
+                    m_Board[row, col] = null;
+                    m_HowManyCellsAreFilled--;
+                }
+            }
+        }
+    
     }
 }

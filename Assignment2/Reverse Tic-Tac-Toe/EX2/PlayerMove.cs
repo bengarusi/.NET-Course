@@ -1,22 +1,22 @@
-﻿namespace EX2
+﻿namespace Ex02
 {
     public struct PlayerMove
     {
-        public int Row;
-        public int Column;
-        public PlayerMove(int row, int column)
+        private int m_Row;
+        private int m_Column;
+        public PlayerMove(int i_Row, int i_Column)
         {
-            Row = row;
-            Column = column;
+            m_Row = i_Row;
+            m_Column = i_Column;
         }
 
         public int GetRow()
         {
-            return Row;
+            return m_Row;
         }
         public int GetColumn()
         {
-            return Column;
+            return m_Column;
         }
     }
 }

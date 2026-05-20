@@ -1,7 +1,7 @@
 ﻿using System;
 using Ex02.ConsoleUtils;
 
-namespace EX2
+namespace Ex02
 {
     public class Game
     {
@@ -11,17 +11,19 @@ namespace EX2
         private int m_OpponentScore = 0;
         private int m_PlayerScore = 0;
         public readonly static int k_ComputerPlayerNumber = 9;
-
+ 
         public void Start()
         {
             int boardSize = 0;
 
             Console.WriteLine("Enter board size between 3 and 9:");
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out boardSize) || boardSize < 3 || boardSize > 9)
+            string inputBoardSize = Console.ReadLine();
+            ExitIfExitCommand(inputBoardSize);
+            while (!int.TryParse(inputBoardSize, out boardSize) || boardSize < 3 || boardSize > 9)
             {
                 Console.WriteLine("Invalid input. Please enter a number between 3 and 9.");
-                input = Console.ReadLine();
+                inputBoardSize = Console.ReadLine();
+                ExitIfExitCommand(inputBoardSize);
             }
 
             m_GameBoard = new Board(boardSize);
@@ -33,11 +35,13 @@ namespace EX2
         {
             Console.WriteLine("Play Against:\n1. Computer\n2. Another Player");
             string choice = Console.ReadLine();
+            ExitIfExitCommand(choice);
 
             while (choice != "1" && choice != "2")
             {
                 Console.WriteLine("Invalid choice. Please enter 1 or 2.");
                 choice = Console.ReadLine();
+                ExitIfExitCommand(choice);
             }
 
             m_OpponentType = (choice == "1") ? k_ComputerPlayerNumber : 2;
@@ -66,32 +70,31 @@ namespace EX2
                 {
                     Console.Write(string.Format(" {0} |", m_GameBoard.GetCellSymbol(i, j)));
                 }
-                Console.WriteLine("\n  " + new string('=', size * 4 + 1));
+
+                Console.Write("\n  ");
+                for (int j = 0; j < size; j++)
+                {
+                    Console.Write("====");
+                }
+
+                Console.Write("=\n");
+               
             }
         }
 
-        private bool getAndValidateMove(int i_PlayerNumber)
+        private void getAndValidateMove(int i_PlayerNumber)
         {
-            bool isQuit = false;
             bool isValidMove = false;
 
-            while (!isValidMove && !isQuit)
+            while (!isValidMove)
             {
                 Console.WriteLine(string.Format("Player {0}'s turn. Enter row (or Q to quit):", i_PlayerNumber));
                 string rowInput = Console.ReadLine();
-                if (rowInput == "Q" || rowInput == "q")
-                {
-                    isQuit = true;
-                    break; 
-                }
+                ExitIfExitCommand(rowInput);
 
                 Console.WriteLine(string.Format("Player {0}'s turn. Enter column (or Q to quit):", i_PlayerNumber));
                 string colInput = Console.ReadLine();
-                if (colInput == "Q" || colInput == "q")
-                {
-                    isQuit = true;
-                    break;
-                }
+                ExitIfExitCommand(colInput);
 
                 int row, col;
                 if (int.TryParse(rowInput, out row) && int.TryParse(colInput, out col))
@@ -109,13 +112,11 @@ namespace EX2
                         isValidMove = m_GameBoard.UpdateBoard(new PlayerMove(row, col), i_PlayerNumber);
                     }
                 }
-                else 
+                else
                 {
                     Console.WriteLine("Invalid input. Please enter numbers only.");
                 }
             }
-
-            return isQuit;
         }
 
         public void GamePlay()
@@ -128,16 +129,16 @@ namespace EX2
                 PrintBoard();
                 if (currentPlayer == k_ComputerPlayerNumber)
                 {
-                    PlayerMove compMove = m_ComputerOpponent.GetMove();
-                    Console.WriteLine(string.Format("\nComputer player move: row {0}, column {1}\n", compMove.Row, compMove.Column));
+                    PlayerMove compMove = m_ComputerOpponent.GetIntelligentMove();
+                    Console.WriteLine(string.Format("\nComputer player move: row {0}, column {1}\n", compMove.GetRow(), compMove.GetColumn()));
                     m_GameBoard.UpdateBoard(compMove, k_ComputerPlayerNumber);
                 }
                 else
                 {
-                    isGameOver = getAndValidateMove(currentPlayer);
+                   getAndValidateMove(currentPlayer);
                 }
 
-                if (!isGameOver && m_GameBoard.CheckWin(currentPlayer))
+                if (!isGameOver && m_GameBoard.CheckIfSequel(currentPlayer))
                 {
                     PrintBoard();
                     Console.WriteLine(string.Format("Game Over! Player {0} hit a sequence and LOST!", currentPlayer));
@@ -171,17 +172,31 @@ namespace EX2
         private void resetGame()
         {
             Console.WriteLine(string.Format("Scores -> You: {0}, Opponent: {1}", m_PlayerScore, m_OpponentScore));
-            Console.WriteLine("Do you want to play again? (y/n)");
+            Console.WriteLine("Do you want to play again? (y)");
             string playAgain = Console.ReadLine();
+            ExitIfExitCommand(playAgain);
             if (playAgain == "y" || playAgain == "Y")
             {
                 m_GameBoard = new Board(m_GameBoard.GetSize());
+                m_ComputerOpponent = new ComputerPlayer(m_GameBoard);
                 GamePlay();
             }
-            else 
+            else
             {
                 Console.WriteLine("\nThanks for playing!");
             }
         }
+
+
+        public void ExitIfExitCommand(string i_Input)
+        {
+            if (i_Input == "Q" || i_Input == "q")
+            {
+                Console.WriteLine("Exiting the game. Goodbye!");
+                Environment.Exit(0);
+            }
+
+        }
+
     }
 }

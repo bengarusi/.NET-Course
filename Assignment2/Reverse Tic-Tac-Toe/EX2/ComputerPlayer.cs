@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EX2
+namespace Ex02
 {
     public class ComputerPlayer
     {
@@ -25,6 +25,60 @@ namespace EX2
             }
 
             return new PlayerMove(row, col);
+        }
+
+        public PlayerMove GetIntelligentMove()
+        {
+            int size = m_GameBoard.GetSize();
+            PlayerMove bestMove = new PlayerMove(-1, -1);
+            PlayerMove fallbackMove = new PlayerMove(-1, -1);
+            bool foundSafeMove = false;
+
+            for (int i = 1; i <= size && !foundSafeMove; i++)
+            {
+                for (int j = 1; j <= size && !foundSafeMove; j++)
+                {
+                    if (m_GameBoard.GetCellSymbol(i - 1, j - 1) == " ")
+                    {
+                        PlayerMove currentMove = new PlayerMove(i, j);
+
+                        if (fallbackMove.GetRow() == -1)
+                        {
+                            fallbackMove = currentMove;
+                        }
+
+                        if (!checkIfMoveLoses(currentMove))
+                        {
+                            bestMove = currentMove;
+                            foundSafeMove = true;
+                        }
+                    }
+                }
+            }
+
+            if (!foundSafeMove)
+            {
+                bestMove = fallbackMove;
+            }
+
+            return bestMove;
+        }
+        private bool checkIfMoveLoses(PlayerMove i_Move)
+        {
+            bool causesLoss = false;
+            bool wasUpdated = m_GameBoard.UpdateBoard(i_Move, Game.k_ComputerPlayerNumber);
+
+            if (wasUpdated)
+            {
+                causesLoss = m_GameBoard.CheckIfSequel(Game.k_ComputerPlayerNumber);
+                m_GameBoard.ClearCell(i_Move);
+            }
+            else
+            {
+                causesLoss = true;
+            }
+
+            return causesLoss;
         }
     }
 }

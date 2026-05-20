@@ -1,5 +1,5 @@
 ﻿using System;
-using EX2;
+using Ex02;
 
 public class Program
 {
