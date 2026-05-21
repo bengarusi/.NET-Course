@@ -10,7 +10,7 @@ namespace Ex02
         private int m_OpponentType;
         private int m_OpponentScore = 0;
         private int m_PlayerScore = 0;
-        public readonly static int k_ComputerPlayerNumber = 9;
+        public const int k_ComputerPlayerNumber = 9;
  
         public void Start()
         {
@@ -18,30 +18,30 @@ namespace Ex02
 
             Console.WriteLine("Enter board size between 3 and 9:");
             string inputBoardSize = Console.ReadLine();
-            ExitIfExitCommand(inputBoardSize);
+            exitIfExitCommand(inputBoardSize);
             while (!int.TryParse(inputBoardSize, out boardSize) || boardSize < 3 || boardSize > 9)
             {
                 Console.WriteLine("Invalid input. Please enter a number between 3 and 9.");
                 inputBoardSize = Console.ReadLine();
-                ExitIfExitCommand(inputBoardSize);
+                exitIfExitCommand(inputBoardSize);
             }
 
             m_GameBoard = new Board(boardSize);
             chooseOpponent();
-            GamePlay();
+            gamePlay();
         }
 
         private void chooseOpponent()
         {
             Console.WriteLine("Play Against:\n1. Computer\n2. Another Player");
             string choice = Console.ReadLine();
-            ExitIfExitCommand(choice);
+            exitIfExitCommand(choice);
 
             while (choice != "1" && choice != "2")
             {
                 Console.WriteLine("Invalid choice. Please enter 1 or 2.");
                 choice = Console.ReadLine();
-                ExitIfExitCommand(choice);
+                exitIfExitCommand(choice);
             }
 
             m_OpponentType = (choice == "1") ? k_ComputerPlayerNumber : 2;
@@ -51,7 +51,7 @@ namespace Ex02
             }
         }
 
-        public void PrintBoard()
+        private void printBoard()
         {
             Screen.Clear();
             int size = m_GameBoard.GetSize();
@@ -90,11 +90,11 @@ namespace Ex02
             {
                 Console.WriteLine(string.Format("Player {0}'s turn. Enter row (or Q to quit):", i_PlayerNumber));
                 string rowInput = Console.ReadLine();
-                ExitIfExitCommand(rowInput);
+                exitIfExitCommand(rowInput);
 
                 Console.WriteLine(string.Format("Player {0}'s turn. Enter column (or Q to quit):", i_PlayerNumber));
                 string colInput = Console.ReadLine();
-                ExitIfExitCommand(colInput);
+                exitIfExitCommand(colInput);
 
                 int row, col;
                 if (int.TryParse(rowInput, out row) && int.TryParse(colInput, out col))
@@ -119,14 +119,14 @@ namespace Ex02
             }
         }
 
-        public void GamePlay()
+        private void gamePlay()
         {
             int currentPlayer = 1;
             bool isGameOver = false;
 
             while (!isGameOver)
             {
-                PrintBoard();
+                printBoard();
                 if (currentPlayer == k_ComputerPlayerNumber)
                 {
                     PlayerMove compMove = m_ComputerOpponent.GetIntelligentMove();
@@ -135,19 +135,19 @@ namespace Ex02
                 }
                 else
                 {
-                   getAndValidateMove(currentPlayer);
+                    getAndValidateMove(currentPlayer);
                 }
 
                 if (!isGameOver && m_GameBoard.CheckIfSequel(currentPlayer))
                 {
-                    PrintBoard();
+                    printBoard();
                     Console.WriteLine(string.Format("Game Over! Player {0} hit a sequence and LOST!", currentPlayer));
                     updateScores(currentPlayer);
                     isGameOver = true;
                 }
                 else if (!isGameOver && m_GameBoard.IsBoardFull())
                 {
-                    PrintBoard();
+                    printBoard();
                     Console.WriteLine("The game is a draw!");
                     isGameOver = true;
                 }
@@ -174,12 +174,12 @@ namespace Ex02
             Console.WriteLine(string.Format("Scores -> You: {0}, Opponent: {1}", m_PlayerScore, m_OpponentScore));
             Console.WriteLine("Do you want to play again? (y)");
             string playAgain = Console.ReadLine();
-            ExitIfExitCommand(playAgain);
+            exitIfExitCommand(playAgain);
             if (playAgain == "y" || playAgain == "Y")
             {
                 m_GameBoard = new Board(m_GameBoard.GetSize());
                 m_ComputerOpponent = new ComputerPlayer(m_GameBoard);
-                GamePlay();
+                gamePlay();
             }
             else
             {
@@ -187,8 +187,7 @@ namespace Ex02
             }
         }
 
-
-        public void ExitIfExitCommand(string i_Input)
+        private void exitIfExitCommand(string i_Input)
         {
             if (i_Input == "Q" || i_Input == "q")
             {

@@ -14,6 +14,7 @@
         {
             return m_Row;
         }
+
         public int GetColumn()
         {
             return m_Column;

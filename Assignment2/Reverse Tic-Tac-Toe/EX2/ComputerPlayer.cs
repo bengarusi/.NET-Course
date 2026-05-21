@@ -4,21 +4,21 @@ namespace Ex02
 {
     public class ComputerPlayer
     {
-        private Board m_GameBoard;
+        private readonly Board r_GameBoard;
 
         public ComputerPlayer(Board i_GameBoard)
         {
-            m_GameBoard = i_GameBoard;
+            r_GameBoard = i_GameBoard;
         }
 
         public PlayerMove GetMove()
         {
             Random random = new Random();
-            int boardSize = m_GameBoard.GetSize();
+            int boardSize = r_GameBoard.GetSize();
             int row = random.Next(1, boardSize + 1);
             int col = random.Next(1, boardSize + 1);
 
-            while (m_GameBoard.GetCellSymbol(row - 1, col - 1) != " ")
+            while (r_GameBoard.GetCellSymbol(row - 1, col - 1) != " ")
             {
                 row = random.Next(1, boardSize + 1);
                 col = random.Next(1, boardSize + 1);
@@ -29,7 +29,7 @@ namespace Ex02
 
         public PlayerMove GetIntelligentMove()
         {
-            int size = m_GameBoard.GetSize();
+            int size = r_GameBoard.GetSize();
             PlayerMove bestMove = new PlayerMove(-1, -1);
             PlayerMove fallbackMove = new PlayerMove(-1, -1);
             bool foundSafeMove = false;
@@ -38,7 +38,7 @@ namespace Ex02
             {
                 for (int j = 1; j <= size && !foundSafeMove; j++)
                 {
-                    if (m_GameBoard.GetCellSymbol(i - 1, j - 1) == " ")
+                    if (r_GameBoard.GetCellSymbol(i - 1, j - 1) == " ")
                     {
                         PlayerMove currentMove = new PlayerMove(i, j);
 
@@ -66,12 +66,12 @@ namespace Ex02
         private bool checkIfMoveLoses(PlayerMove i_Move)
         {
             bool causesLoss = false;
-            bool wasUpdated = m_GameBoard.UpdateBoard(i_Move, Game.k_ComputerPlayerNumber);
+            bool wasUpdated = r_GameBoard.UpdateBoard(i_Move, Game.k_ComputerPlayerNumber);
 
             if (wasUpdated)
             {
-                causesLoss = m_GameBoard.CheckIfSequel(Game.k_ComputerPlayerNumber);
-                m_GameBoard.ClearCell(i_Move);
+                causesLoss = r_GameBoard.CheckIfSequel(Game.k_ComputerPlayerNumber);
+                r_GameBoard.ClearCell(i_Move);
             }
             else
             {
