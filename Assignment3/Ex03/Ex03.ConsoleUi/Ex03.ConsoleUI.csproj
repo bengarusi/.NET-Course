@@ -46,5 +46,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConsoleInputReader.cs" />
+    <Compile Include="ConsoleOutputWriter.cs" />
+    <Compile Include="ConsoleApp.cs" />
+    <Compile Include="eMenuOption.cs" />
+    <Compile Include="GarageActionHandler.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

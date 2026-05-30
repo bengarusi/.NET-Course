@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// It holds the actual built Vehicle !!
 namespace Ex03.GarageLogic
 {
     public class GarageVehicleRecord
     {
-        private Vehicle m_Vehicle;
+        private readonly Vehicle r_Vehicle;
         private string m_OwnerName;
         private string m_OwnerPhoneNumber;
-        private eVehicleStatus m_VehicleStatus; 
+        private eVehicleStatus m_VehicleStatus;
 
 
         public GarageVehicleRecord(Vehicle i_Vehicle, string i_OwnerName, string i_OwnerPhoneNumber)
         {
-            m_Vehicle = i_Vehicle;
+            r_Vehicle = i_Vehicle;
             m_OwnerName = i_OwnerName;
             m_OwnerPhoneNumber = i_OwnerPhoneNumber;
             m_VehicleStatus = eVehicleStatus.InRepair;
@@ -24,7 +25,7 @@ namespace Ex03.GarageLogic
 
         public Vehicle Vehicle
         {
-            get { return m_Vehicle; }
+            get { return r_Vehicle; }
         }
 
         public string OwnerName
@@ -42,22 +43,16 @@ namespace Ex03.GarageLogic
             set { m_VehicleStatus = value; }
         }
 
-        public string GetFullDetails()
+        public override string ToString()
         {
-            /*
-            return string.Format()
-
             StringBuilder details = new StringBuilder();
-            details.AppendLine($"Owner Name: {m_OwnerName}");
-            details.AppendLine($"Owner Phone Number: {m_OwnerPhoneNumber}");
-            details.AppendLine($"Vehicle Status: {m_VehicleStatus}");
-            details.AppendLine($"Vehicle Model: {m_Vehicle.ModelName}");
-            details.AppendLine($"Vehicle License Number: {m_Vehicle.LicenseNumber}");
-            details.AppendLine($"Energy Percentage: {m_Vehicle.EnergyPercentage}%");
-            // Add more vehicle details as needed
+
+            details.AppendLine("Owner: " + m_OwnerName + " (" + m_OwnerPhoneNumber + ")");
+            details.AppendLine("Status: " + m_VehicleStatus);
+            details.Append(r_Vehicle.ToString());
+
             return details.ToString();
-            */
-
         }
-}
 
+    }
+}

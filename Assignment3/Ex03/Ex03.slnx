@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="Ex03.ConsoleUi/Ex03.ConsoleUI.csproj" />
-  <Project Path="Ex03.GarageLogic/Ex03.GarageLogic.csproj" />
-  <Project Path="Ex03/Ex03.csproj" />
+  <Project Path="Ex03.ConsoleUi/Ex03.ConsoleUI.csproj" Id="41cacd57-a331-414a-8114-7e1b1e6bede8" />
+  <Project Path="Ex03.GarageLogic/Ex03.GarageLogic.csproj" Id="a11d2c52-34c0-4b95-bc64-ebce6b0a85c7" />
+  <Project Path="Ex03/Ex03.csproj" Id="7257183a-1624-4946-917e-a78b1465bd99" />
 </Solution>
