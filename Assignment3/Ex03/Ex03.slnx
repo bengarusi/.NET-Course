@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Ex03.ConsoleUi/Ex03.ConsoleUI.csproj" />
+  <Project Path="Ex03.GarageLogic/Ex03.GarageLogic.csproj" />
+  <Project Path="Ex03/Ex03.csproj" />
+</Solution>
