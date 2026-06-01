@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// It holds the actual built Vehicle !!
 namespace Ex03.GarageLogic
 {
     public class GarageVehicleRecord

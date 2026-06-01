@@ -1,9 +1,5 @@
 ﻿using Ex03.GarageLogic;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUi
 {
@@ -28,18 +24,7 @@ namespace Ex03.ConsoleUi
                 string ownerPhoneNumber = i_DataToValidate.OwnerPhoneNumber;
                 string wheelManufacturer = i_DataToValidate.WheelManufacturer;
 
-                bool hasOnlyDigits = true;
-                bool hasOnlyLettersSpacesOrDash = true;
-                bool hasOnlyPhoneDigits = true;
-                bool hasLetterOrDigitInModel = false;
-                bool hasLetterInManufacturer = false;
-                bool hasNonSpaceLicense = false;
-                bool hasNonSpaceModel = false;
-                bool hasNonSpaceOwnerName = false;
-                bool hasNonSpacePhone = false;
-                bool hasNonSpaceManufacturer = false;
-
-                // License number validation: not empty, not only spaces, only digits
+                // License number validation: not empty, only digits
                 if (licenseNumber == null || licenseNumber.Length == 0)
                 {
                     errorMessages += string.Format(showInvalidDataMessage, "License Number");
@@ -47,29 +32,25 @@ namespace Ex03.ConsoleUi
                 }
                 else
                 {
-                    for (int i = 0; i < licenseNumber.Length; i++)
+                    bool onlyDigits = true;
+
+                    foreach (char c in licenseNumber)
                     {
-                        char currentChar = licenseNumber[i];
-
-                        if (currentChar != ' ')
+                        if (!char.IsDigit(c))
                         {
-                            hasNonSpaceLicense = true;
-                        }
-
-                        if (currentChar < '0' || currentChar > '9')
-                        {
-                            hasOnlyDigits = false;
+                            onlyDigits = false;
+                            break;
                         }
                     }
 
-                    if (!hasNonSpaceLicense || !hasOnlyDigits)
+                    if (!onlyDigits)
                     {
                         errorMessages += string.Format(showInvalidDataMessage, "License Number");
                         isValid = false;
                     }
                 }
 
-                // Model name validation: not empty, not only spaces, contains at least one letter or digit
+                // Model name validation: not empty, at least one letter or digit
                 if (modelName == null || modelName.Length == 0)
                 {
                     errorMessages += string.Format(showInvalidDataMessage, "Model Name");
@@ -77,31 +58,30 @@ namespace Ex03.ConsoleUi
                 }
                 else
                 {
-                    for (int i = 0; i < modelName.Length; i++)
-                    {
-                        char currentChar = modelName[i];
+                    bool hasLetterOrDigit = false;
+                    bool hasNonSpace = false;
 
-                        if (currentChar != ' ')
+                    foreach (char c in modelName)
+                    {
+                        if (c != ' ')
                         {
-                            hasNonSpaceModel = true;
+                            hasNonSpace = true;
                         }
 
-                        if ((currentChar >= '0' && currentChar <= '9') ||
-                            (currentChar >= 'a' && currentChar <= 'z') ||
-                            (currentChar >= 'A' && currentChar <= 'Z'))
+                        if (char.IsLetter(c) || char.IsDigit(c))
                         {
-                            hasLetterOrDigitInModel = true;
+                            hasLetterOrDigit = true;
                         }
                     }
 
-                    if (!hasNonSpaceModel || !hasLetterOrDigitInModel)
+                    if (!hasNonSpace || !hasLetterOrDigit)
                     {
                         errorMessages += string.Format(showInvalidDataMessage, "Model Name");
                         isValid = false;
                     }
                 }
 
-                // Owner name validation: not empty, not only spaces, only English letters, spaces or '-'
+                // Owner name validation: not empty, only letters, spaces or dashes
                 if (ownerName == null || ownerName.Length == 0)
                 {
                     errorMessages += string.Format(showInvalidDataMessage, "Owner Name");
@@ -109,25 +89,24 @@ namespace Ex03.ConsoleUi
                 }
                 else
                 {
-                    for (int i = 0; i < ownerName.Length; i++)
-                    {
-                        char currentChar = ownerName[i];
+                    bool hasOnlyLettersSpacesOrDash = true;
+                    bool hasNonSpace = false;
 
-                        if (currentChar != ' ')
+                    foreach (char c in ownerName)
+                    {
+                        if (c != ' ')
                         {
-                            hasNonSpaceOwnerName = true;
+                            hasNonSpace = true;
                         }
 
-                        if (!((currentChar >= 'a' && currentChar <= 'z') ||
-                              (currentChar >= 'A' && currentChar <= 'Z') ||
-                              currentChar == ' ' ||
-                              currentChar == '-'))
+                        if (!char.IsLetter(c) && c != ' ' && c != '-')
                         {
                             hasOnlyLettersSpacesOrDash = false;
+                            break;
                         }
                     }
 
-                    if (!hasNonSpaceOwnerName || !hasOnlyLettersSpacesOrDash)
+                    if (!hasNonSpace || !hasOnlyLettersSpacesOrDash)
                     {
                         errorMessages += string.Format(showInvalidDataMessage, "Owner Name");
                         isValid = false;
@@ -142,32 +121,25 @@ namespace Ex03.ConsoleUi
                 }
                 else
                 {
-                    for (int i = 0; i < ownerPhoneNumber.Length; i++)
+                    bool onlyDigits = true;
+
+                    foreach (char c in ownerPhoneNumber)
                     {
-                        char currentChar = ownerPhoneNumber[i];
-
-                        if (currentChar != ' ')
+                        if (!char.IsDigit(c))
                         {
-                            hasNonSpacePhone = true;
-                        }
-
-                        if (currentChar < '0' || currentChar > '9')
-                        {
-                            hasOnlyPhoneDigits = false;
+                            onlyDigits = false;
+                            break;
                         }
                     }
 
-                    if (!hasNonSpacePhone ||
-                        !hasOnlyPhoneDigits ||
-                        ownerPhoneNumber.Length < 9 ||
-                        ownerPhoneNumber.Length > 10)
+                    if (!onlyDigits || ownerPhoneNumber.Length < 9 || ownerPhoneNumber.Length > 10)
                     {
                         errorMessages += string.Format(showInvalidDataMessage, "Owner Phone Number");
                         isValid = false;
                     }
                 }
 
-                // Wheel manufacturer validation: not empty, not only spaces, contains at least one English letter
+                // Wheel manufacturer validation: not empty, at least one letter
                 if (wheelManufacturer == null || wheelManufacturer.Length == 0)
                 {
                     errorMessages += string.Format(showInvalidDataMessage, "Wheel Manufacturer");
@@ -175,23 +147,23 @@ namespace Ex03.ConsoleUi
                 }
                 else
                 {
-                    for (int i = 0; i < wheelManufacturer.Length; i++)
-                    {
-                        char currentChar = wheelManufacturer[i];
+                    bool hasLetter = false;
+                    bool hasNonSpace = false;
 
-                        if (currentChar != ' ')
+                    foreach (char c in wheelManufacturer)
+                    {
+                        if (c != ' ')
                         {
-                            hasNonSpaceManufacturer = true;
+                            hasNonSpace = true;
                         }
 
-                        if ((currentChar >= 'a' && currentChar <= 'z') ||
-                            (currentChar >= 'A' && currentChar <= 'Z'))
+                        if (char.IsLetter(c))
                         {
-                            hasLetterInManufacturer = true;
+                            hasLetter = true;
                         }
                     }
 
-                    if (!hasNonSpaceManufacturer || !hasLetterInManufacturer)
+                    if (!hasNonSpace || !hasLetter)
                     {
                         errorMessages += string.Format(showInvalidDataMessage, "Wheel Manufacturer");
                         isValid = false;
@@ -199,8 +171,7 @@ namespace Ex03.ConsoleUi
                 }
 
                 // Energy percentage validation
-                if (i_DataToValidate.EnergyPercentage < 0 ||
-                    i_DataToValidate.EnergyPercentage > 100)
+                if (i_DataToValidate.EnergyPercentage < 0 || i_DataToValidate.EnergyPercentage > 100)
                 {
                     errorMessages += string.Format(showInvalidDataMessage, "Energy Percentage");
                     isValid = false;
@@ -216,10 +187,7 @@ namespace Ex03.ConsoleUi
                 // Vehicle type validation
                 try
                 {
-                    Vehicle tempVehicle = VehicleCreator.CreateVehicle(
-                        i_DataToValidate.VehicleType,
-                        null,
-                        null);
+                    Vehicle tempVehicle = VehicleCreator.CreateVehicle(i_DataToValidate.VehicleType, null, null);
 
                     if (tempVehicle == null)
                     {

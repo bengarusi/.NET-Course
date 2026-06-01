@@ -8,7 +8,6 @@ namespace Ex03.ConsoleUI
     {
         public static void PrintMainMenu()
         {
-           
             Console.WriteLine("===== Garage Management System =====");
             Console.WriteLine("1. Load vehicles from file");
             Console.WriteLine("2. Insert a new vehicle");

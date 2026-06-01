@@ -1,11 +1,10 @@
 ﻿using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.IO;    
 
 
-// this is just a main i maid to test the loading opartion 
-// can delete it in order to make ConsoleUI
+
 namespace Ex03.ConsoleUI
 {
     public class ConsoleApp
@@ -24,6 +23,7 @@ namespace Ex03.ConsoleUI
         { 
             Console.WriteLine("Welcome to the Garage Management System!");
             bool exit = false;
+
             while (!exit)
             {
                 PrintMenu.PrintMainMenu();

@@ -8,9 +8,8 @@ namespace Ex03.GarageLogic
 {
     public class GarageManager
     {
-        private readonly Dictionary<string, GarageVehicleRecord> r_VehiclesInGarage =new Dictionary<string, GarageVehicleRecord>();
+        private readonly Dictionary<string, GarageVehicleRecord> r_VehiclesInGarage = new Dictionary<string, GarageVehicleRecord>();
 
-        // ----- Operation 1: load the system from the DB file -----
         public void ImportVehiclesFromFile(string[] i_Lines)
         {
             List<NewVehicleData> vehiclesData = VehicleFileLoader.ParseLines(i_Lines);
@@ -20,13 +19,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        // ----- Operation 2 -----
         public bool IsVehicleInGarage(string i_LicenseNumber)
         {
             return r_VehiclesInGarage.ContainsKey(i_LicenseNumber);
         }
 
-        public List<string> GetRequiredFieldsForType(string i_VehicleType) // maybe not needed, just to tell the user what to enter for each type of vehicle
+        public List<string> GetRequiredFieldsForType(string i_VehicleType) 
         {
             Vehicle vehicle = VehicleCreator.CreateVehicle(i_VehicleType, null, null);
             if (vehicle == null)
@@ -56,7 +54,6 @@ namespace Ex03.GarageLogic
             r_VehiclesInGarage[vehicle.LicenseNumber] = record;
         }
 
-        // ----- Operation 3 -----
         public List<string> GetAllLicenseIds()
         {
             return new List<string>(r_VehiclesInGarage.Keys);
@@ -77,7 +74,6 @@ namespace Ex03.GarageLogic
             return licenseIds;
         }
 
-        // ----- Operation 4 -----
         public void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewVehicleStatus)
         {
             GarageVehicleRecord record = GetVehicleRecord(i_LicenseNumber);
@@ -85,7 +81,6 @@ namespace Ex03.GarageLogic
             record.VehicleStatus = i_NewVehicleStatus;
         }
 
-        // ----- Operation 5 -----
         public void InflateVehicleWheelsToMax(string i_LicenseNumber)
         {
             GarageVehicleRecord record = GetVehicleRecord(i_LicenseNumber);
@@ -93,7 +88,6 @@ namespace Ex03.GarageLogic
             record.Vehicle.InflateAllWheelsToMax();
         }
 
-        // ----- Operation 6 -----
         public void RefuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountToAdd)
         { 
             FuelEngine engine = GetVehicleRecord(i_LicenseNumber).Vehicle.Engine as FuelEngine;
@@ -107,10 +101,9 @@ namespace Ex03.GarageLogic
 
         }
 
-        // ----- Operation 7 (input is minutes; the model stores hours) -----
         public void RechargeVehicle(string i_LicenseNumber, float i_MinutesToAdd)
         {
-            //!!!!!! need to do - this is not generic maybe can do it better way !!!!!!
+            
             ElectricEngine engine = GetVehicleRecord(i_LicenseNumber).Vehicle.Engine as ElectricEngine;
 
             if (engine == null)
@@ -122,7 +115,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        // ----- Operation 8 -----
+        
         public string GetFullVehicleDetails(string i_LicenseNumber)
         {
             GarageVehicleRecord record = GetVehicleRecord(i_LicenseNumber);
@@ -130,7 +123,7 @@ namespace Ex03.GarageLogic
             return record.ToString();
         }
 
-        // ----- Utils -----
+        
         public GarageVehicleRecord GetVehicleRecord(string i_LicenseNumber)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))

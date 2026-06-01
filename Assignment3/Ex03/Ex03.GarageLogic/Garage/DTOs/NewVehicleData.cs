@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-// the form the user fills out !!
 namespace Ex03.GarageLogic
 {
     public class NewVehicleData
