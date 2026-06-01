@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System;
 using System.Collections.Generic;
 
@@ -61,7 +61,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("===========================");
         }
 
-        /*
+        
         public void PrintEnumOptions(Type i_EnumType)
         {
             Console.WriteLine("Possible values:");
@@ -74,4 +74,4 @@ namespace Ex03.ConsoleUI
         
     }
 }
-        */
+        
