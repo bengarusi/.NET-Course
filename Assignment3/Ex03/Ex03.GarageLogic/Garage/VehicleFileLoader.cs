@@ -5,12 +5,6 @@ using Ex03.GarageLogic;
 
 
 
-/*
- * *****Remove this line and below:
-THE FORMAT IS:
-VehicleType, LicensePlate, ModelName, EnergyPercentage, TierModel, CurrAirPressure, OwnerName, OwnerPhone, [SPECIFIC VEHICLE PROPERTIES]
-*/
-
 namespace Ex03.GarageLogic
 {
     public class VehicleFileLoader
@@ -28,20 +22,19 @@ namespace Ex03.GarageLogic
 
         public static List<NewVehicleData> ParseLines(string[] i_Lines)
         {
-            List<NewVehicleData> VehicleDataList = new List<NewVehicleData>();
+            List<NewVehicleData> vehicleDataList = new List<NewVehicleData>();
 
             foreach (string line in i_Lines)
             {
 
-                VehicleDataList.Add(CreateVehicleFromLine(line));
+                vehicleDataList.Add(createVehicleFromLine(line));
             }
 
-            return VehicleDataList;
+            return vehicleDataList;
         }
 
 
-        // !! this function maybe needed a validation before the parsing !!
-        private static NewVehicleData CreateVehicleFromLine(string i_Line)
+        private static NewVehicleData createVehicleFromLine(string i_Line)
         {
             string[] fields = i_Line.Split(',');
 
@@ -50,15 +43,15 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Vehicle line has missing fields.");
             }
 
-            NewVehicleData NewVehicle = new NewVehicleData();
-            NewVehicle.VehicleType = fields[k_VehicleTypeIndex];
-            NewVehicle.LicenseNumber = fields[k_LicenseIDIndex];
-            NewVehicle.ModelName = fields[k_ModelNameIndex];
-            NewVehicle.EnergyPercentage = float.Parse(fields[k_EnergyPercentageIndex]);
-            NewVehicle.WheelManufacturer = fields[k_WheelManufacturerIndex];
-            NewVehicle.CurrentAirPressure = float.Parse(fields[k_CurrentAirPressureIndex]);
-            NewVehicle.OwnerName = fields[k_OwnerNameIndex];
-            NewVehicle.OwnerPhoneNumber = fields[k_OwnerPhoneIndex];
+            NewVehicleData newVehicle = new NewVehicleData();
+            newVehicle.VehicleType = fields[k_VehicleTypeIndex];
+            newVehicle.LicenseNumber = fields[k_LicenseIDIndex];
+            newVehicle.ModelName = fields[k_ModelNameIndex];
+            newVehicle.EnergyPercentage = float.Parse(fields[k_EnergyPercentageIndex]);
+            newVehicle.WheelManufacturer = fields[k_WheelManufacturerIndex];
+            newVehicle.CurrentAirPressure = float.Parse(fields[k_CurrentAirPressureIndex]);
+            newVehicle.OwnerName = fields[k_OwnerNameIndex];
+            newVehicle.OwnerPhoneNumber = fields[k_OwnerPhoneIndex];
 
             List<string> uniqueFieldsForSpecificVehicle = new List<string>();
             for (int i = k_FirstUniqueFieldIndex; i < fields.Length; i++)
@@ -66,9 +59,9 @@ namespace Ex03.GarageLogic
                 uniqueFieldsForSpecificVehicle.Add(fields[i]);
             }
 
-            NewVehicle.UniqueFields = uniqueFieldsForSpecificVehicle;
+            newVehicle.UniqueFields = uniqueFieldsForSpecificVehicle;
 
-            return NewVehicle;
+            return newVehicle;
         }
 
 
