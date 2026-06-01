@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
 
         protected void addEnergy(float i_Amount)
         {
-            if (i_Amount < 0 ||m_CurrentEnergy + i_Amount > r_MaxEnergy)
+            if (i_Amount < 0 || m_CurrentEnergy + i_Amount > r_MaxEnergy)
             {
                 throw new ValueRangeException(0, r_MaxEnergy);
             }

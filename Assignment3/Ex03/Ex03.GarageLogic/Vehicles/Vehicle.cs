@@ -23,8 +23,7 @@ namespace Ex03.GarageLogic
                 m_Wheels.Add(new Wheel(i_MaxAirPressure));
             }
         }
-        // -------------------------------------------
-
+       
         public Engine Engine
         {
             get { return m_Engine; }
@@ -34,19 +33,22 @@ namespace Ex03.GarageLogic
         {
             get { return r_ModelName; }
         }
+
         public string LicenseNumber
         {
             get { return r_LicenseNumber; }
         }
+
         public List<Wheel> Wheels
         {
             get { return m_Wheels; }
         }
-        // -------------------------------------------
+
         public void SetEnergyPercentage(float i_Percentage)
         {
             m_Engine.SetEnergyByPercentage(i_Percentage);
         }
+
         public void SetWheelsData(string i_ManufacturerName, float i_CurrentAirPressure)
         {
             foreach (Wheel wheel in m_Wheels)
@@ -54,6 +56,7 @@ namespace Ex03.GarageLogic
                 wheel.SetWheelDetails(i_ManufacturerName, i_CurrentAirPressure);
             }
         }
+
         public void InflateAllWheelsToMax()
         {
             foreach (Wheel wheel in m_Wheels)
@@ -61,14 +64,14 @@ namespace Ex03.GarageLogic
                 wheel.InflateToMax();
             }
         }
+
         public abstract List<string> GetRequiredFields();
 
         public abstract void InitializeUniqueData(List<string> i_UniqueData);
 
-
         public override string ToString()
         {
-            StringBuilder details = new StringBuilder(); //did we learn it ?
+            StringBuilder details = new StringBuilder(); 
 
             details.AppendLine("License: " + r_LicenseNumber);
             details.AppendLine("Model: " + r_ModelName);

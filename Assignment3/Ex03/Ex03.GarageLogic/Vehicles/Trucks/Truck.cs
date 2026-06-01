@@ -13,20 +13,23 @@ namespace Ex03.GarageLogic
         private bool m_IsCarryingRefrigerantCargo;
         private float m_CargoVolume;
 
-        protected Truck(string i_LicenseNumber, string i_ModelName) :
+        protected Truck( string i_ModelName, string i_LicenseNumber) :
             base(i_ModelName, i_LicenseNumber, sr_NumOfWheels, sr_MaxAirPressure)
         {
         }
+
         public bool IsCarryingRefrigerantCargo
         {
             get { return m_IsCarryingRefrigerantCargo; }
             set { m_IsCarryingRefrigerantCargo = value; }
         }
+
         public float CargoVolume
         {
             get { return m_CargoVolume; }
             set { m_CargoVolume = value; }
         }
+
         public override List<string> GetRequiredFields()
         {
             return new List<string>
@@ -35,12 +38,12 @@ namespace Ex03.GarageLogic
                 "Cargo volume"
             };
         }
-        public override void InitializeUniqueData(List<string> i_UniqueData)
-        {
-            m_IsCarryingRefrigerantCargo = bool.Parse(i_UniqueData[0]);
-            m_CargoVolume = float.Parse(i_UniqueData[1]);
-        }
 
+        public override void InitializeUniqueData(List<string> i_TruckData)
+        {
+            m_IsCarryingRefrigerantCargo = bool.Parse(i_TruckData[0]);
+            m_CargoVolume = float.Parse(i_TruckData[1]);
+        }
         
         public override string ToString()
         {
