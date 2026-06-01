@@ -50,13 +50,11 @@
     <Compile Include="Garage\GarageManager.cs" />
     <Compile Include="Garage\DTOs\GarageVehicleRecord.cs" />
     <Compile Include="Garage\VehicleFileLoader.cs" />
-    <Compile Include="Interfaces\IElectricVehicle.cs" />
     <Compile Include="Enums\eCarColor.cs" />
     <Compile Include="Enums\eFuelType.cs" />
     <Compile Include="Enums\eLicenseType.cs" />
     <Compile Include="Vehicles\Cars\FuelCar.cs" />
     <Compile Include="Vehicles\Motorcycles\FuelMotorcycle.cs" />
-    <Compile Include="Interfaces\IFuelVehicle.cs" />
     <Compile Include="Vehicles\Motorcycles\Motorcycle.cs" />
     <Compile Include="Vehicles\Trucks\FuelTruck.cs" />
     <Compile Include="Vehicles\Trucks\Truck.cs" />

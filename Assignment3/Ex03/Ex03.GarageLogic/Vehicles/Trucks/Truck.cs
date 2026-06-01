@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private bool m_IsCarryingRefrigerantCargo;
         private float m_CargoVolume;
 
-        protected Truck( string i_ModelName, string i_LicenseNumber) :
+        protected Truck(string i_LicenseNumber, string i_ModelName) :
             base(i_ModelName, i_LicenseNumber, sr_NumOfWheels, sr_MaxAirPressure)
         {
         }

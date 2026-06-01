@@ -11,61 +11,26 @@ namespace Ex03.ConsoleUI
     public class ConsoleApp
     {
         private readonly GarageManager r_GarageManager;
+        private readonly GarageActionsHandler r_GarageActionsHandler;
+       
 
         public ConsoleApp()
         {
             r_GarageManager = new GarageManager();
+            r_GarageActionsHandler = new GarageActionsHandler(r_GarageManager);
         }
 
         public void Run()
-        {
-            try
+        { 
+            Console.WriteLine("Welcome to the Garage Management System!");
+            bool exit = false;
+            while (!exit)
             {
-                string[] lines = File.ReadAllLines("VehiclesDB.txt");
-
-                r_GarageManager.ImportVehiclesFromFile(lines);
-
-                Console.WriteLine("Vehicles loaded successfully.");
-                Console.WriteLine();
-
-                List<string> licenseIds = r_GarageManager.GetAllLicenseIds();
-
-                Console.WriteLine("Loaded license numbers:");
-                foreach (string licenseId in licenseIds)
-                {
-                    Console.WriteLine(licenseId);
-                }
-
-                Console.WriteLine();
-                Console.WriteLine("Full details test:");
-                Console.WriteLine(r_GarageManager.GetFullVehicleDetails("64-281-95"));
-
-                Console.WriteLine("Fuel motorcycle test:");
-                Console.WriteLine(r_GarageManager.GetFullVehicleDetails("29-714-58"));
-
-                Console.WriteLine("Electric motorcycle test:");
-                Console.WriteLine(r_GarageManager.GetFullVehicleDetails("17-925-43"));
-
-                Console.WriteLine("Fuel car test:");
-                Console.WriteLine(r_GarageManager.GetFullVehicleDetails("64-281-95"));
-
-                Console.WriteLine("Electric car test:");
-                Console.WriteLine(r_GarageManager.GetFullVehicleDetails("46-389-72"));
-
-                Console.WriteLine("Fuel truck test:");
-                Console.WriteLine(r_GarageManager.GetFullVehicleDetails("93-672-18"));
-
+                PrintMenu.PrintMainMenu();
+                eMenuOption eOptionType = (eMenuOption)Enum.Parse(typeof(eMenuOption), Console.ReadLine());
+                r_GarageActionsHandler.HandleAction(eOptionType);
+                exit = eOptionType == eMenuOption.Exit;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error:");
-                Console.WriteLine(ex.GetType().Name);
-                Console.WriteLine(ex.Message);
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Press Enter to exit...");
-            Console.ReadLine();
         }
     }
 }

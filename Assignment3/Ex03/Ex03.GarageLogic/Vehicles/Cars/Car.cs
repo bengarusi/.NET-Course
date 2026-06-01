@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private static readonly int sr_NumOfWheels = 5;
         private static readonly float sr_MaxAirPressure = 31f;
 
-        protected Car(string i_ModelName, string i_Licence)
+        protected Car(string i_Licence, string i_ModelName)
             : base(i_ModelName, i_Licence, sr_NumOfWheels, sr_MaxAirPressure)
         {
         }

@@ -47,12 +47,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleInputReader.cs" />
-    <Compile Include="ConsoleOutputWriter.cs" />
+    <Compile Include="PrintMenu.cs" />
     <Compile Include="ConsoleApp.cs" />
     <Compile Include="eMenuOption.cs" />
     <Compile Include="GarageActionHandler.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ValidateInputs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
