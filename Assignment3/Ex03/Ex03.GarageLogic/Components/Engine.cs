@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic
             m_CurrentEnergy = (i_Percentage / 100f) * r_MaxEnergy;
         }
 
-        protected void addEnergy(float i_Amount)
+        protected void AddEnergy(float i_Amount)
         {
             if (i_Amount < 0 || m_CurrentEnergy + i_Amount > r_MaxEnergy)
             {

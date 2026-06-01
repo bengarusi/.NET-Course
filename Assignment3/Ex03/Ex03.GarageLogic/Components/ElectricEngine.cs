@@ -9,7 +9,7 @@
 
         public void Charge(float i_HoursToAdd)
         {
-            addEnergy(i_HoursToAdd);
+            AddEnergy(i_HoursToAdd);
         }
 
         public override string ToString()
