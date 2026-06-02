@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{41CACD57-A331-414A-8114-7E1B1E6BEDE8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Ex03.ConsoleUi</RootNamespace>
-    <AssemblyName>Ex03.ConsoleUi</AssemblyName>
+    <RootNamespace>Ex03.ConsoleUI</RootNamespace>
+    <AssemblyName>Ex03.ConsoleUI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

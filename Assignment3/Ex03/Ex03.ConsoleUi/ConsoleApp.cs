@@ -1,10 +1,6 @@
 ﻿using Ex03.GarageLogic;
 using System;
-using System.Collections.Generic;
-using System.IO;    
-
-
-
+  
 namespace Ex03.ConsoleUI
 {
     public class ConsoleApp
@@ -12,7 +8,6 @@ namespace Ex03.ConsoleUI
         private readonly GarageManager r_GarageManager;
         private readonly GarageActionsHandler r_GarageActionsHandler;
        
-
         public ConsoleApp()
         {
             r_GarageManager = new GarageManager();
@@ -27,9 +22,30 @@ namespace Ex03.ConsoleUI
             while (!exit)
             {
                 PrintMenu.PrintMainMenu();
-                eMenuOption eOptionType = (eMenuOption)Enum.Parse(typeof(eMenuOption), Console.ReadLine());
-                r_GarageActionsHandler.HandleAction(eOptionType);
-                exit = eOptionType == eMenuOption.Exit;
+
+                string userInput = Console.ReadLine();
+                int userChoice;
+
+                if (!int.TryParse(userInput, out userChoice))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    continue;
+                }
+
+                if (userChoice < 1 || userChoice > 9)
+                {
+                    Console.WriteLine("Invalid menu option. Please choose a number between 1 and 9.");
+                    continue;
+                }
+
+                eMenuOption selectedOption = (eMenuOption)userChoice;
+
+                r_GarageActionsHandler.HandleAction(selectedOption);
+
+                if (selectedOption == eMenuOption.Exit)
+                {
+                    exit = true;
+                }
             }
         }
     }

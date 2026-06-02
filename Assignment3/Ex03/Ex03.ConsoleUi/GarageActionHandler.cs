@@ -1,5 +1,4 @@
-﻿using Ex03.ConsoleUi;
-using Ex03.GarageLogic;
+﻿using Ex03.GarageLogic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +16,6 @@ namespace Ex03.ConsoleUI
             r_GarageManager = i_GarageManager;
         }
 
- 
         public void HandleAction(eMenuOption i_MenuOption)
         {
             switch (i_MenuOption)
@@ -69,9 +67,17 @@ namespace Ex03.ConsoleUI
         }
         private void loadVehiclesFromFile()
         {
-            string[] lines = File.ReadAllLines(sr_DefaultVehiclesFileName);
+            try
+            {
+                string[] lines = File.ReadAllLines(sr_DefaultVehiclesFileName);
 
-            r_GarageManager.ImportVehiclesFromFile(lines);
+                r_GarageManager.ImportVehiclesFromFile(lines);
+                Console.WriteLine("Vehicles loaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Failed to load vehicles: {0}", ex.Message));
+            }
         }
 
         private void insertNewVehicle()
@@ -108,7 +114,13 @@ namespace Ex03.ConsoleUI
                 NewVehicleData newVehicleData = new NewVehicleData();
                 newVehicleData.LicenseNumber = licenseNumber;
 
-                Console.WriteLine("Please enter Vehicle Type (e.g. FuelCar, ElectricCar, FuelMotorcycle, ElectricMotorcycle, FuelTruck):");
+                Console.WriteLine("Please enter Vehicle Type:");
+                foreach (string vehicleType in r_GarageManager.GetSupportedVehicleTypes())
+                {
+                    Console.Write(vehicleType);
+                    Console.Write(", ");
+                }
+                Console.WriteLine();
                 newVehicleData.VehicleType = Console.ReadLine();
 
                 try
@@ -167,6 +179,8 @@ namespace Ex03.ConsoleUI
             string filterOption = Console.ReadLine();
             eVehicleStatus vehicleStatus;
             List<string> licensePlates = new List<string>();
+            bool isValidFilter = true;
+
 
             if (filterOption == "All")
             {
@@ -176,8 +190,12 @@ namespace Ex03.ConsoleUI
             {
                licensePlates = r_GarageManager.GetLicenseIdsByStatus(vehicleStatus);
             }
+            else
+            {
+                isValidFilter = false;
+            }
 
-            if (licensePlates == null)
+            if (!isValidFilter)
             { 
                 Console.WriteLine("Invalid filter option.");
             }
@@ -193,7 +211,6 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine(licenseNumber);
                 }
             }
-
         }
 
         private void changeVehicleStatus()
@@ -309,6 +326,5 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(details);
             }
         }
-
     }
 }

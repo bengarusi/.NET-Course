@@ -1,7 +1,8 @@
 ﻿using Ex03.GarageLogic;
+
 using System;
 
-namespace Ex03.ConsoleUi
+namespace Ex03.ConsoleUI
 {
     public static class ValidateInputs
     {
@@ -168,37 +169,6 @@ namespace Ex03.ConsoleUi
                         errorMessages += string.Format(showInvalidDataMessage, "Wheel Manufacturer");
                         isValid = false;
                     }
-                }
-
-                // Energy percentage validation
-                if (i_DataToValidate.EnergyPercentage < 0 || i_DataToValidate.EnergyPercentage > 100)
-                {
-                    errorMessages += string.Format(showInvalidDataMessage, "Energy Percentage");
-                    isValid = false;
-                }
-
-                // Air pressure validation
-                if (i_DataToValidate.CurrentAirPressure < 0)
-                {
-                    errorMessages += string.Format(showInvalidDataMessage, "Current Air Pressure");
-                    isValid = false;
-                }
-
-                // Vehicle type validation
-                try
-                {
-                    Vehicle tempVehicle = VehicleCreator.CreateVehicle(i_DataToValidate.VehicleType, null, null);
-
-                    if (tempVehicle == null)
-                    {
-                        errorMessages += string.Format(showInvalidDataMessage, "Vehicle Type");
-                        isValid = false;
-                    }
-                }
-                catch
-                {
-                    errorMessages += string.Format(showInvalidDataMessage, "Vehicle Type");
-                    isValid = false;
                 }
             }
 

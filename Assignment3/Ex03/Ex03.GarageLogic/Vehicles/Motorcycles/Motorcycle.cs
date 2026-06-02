@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -42,8 +39,22 @@ namespace Ex03.GarageLogic
 
         public override void InitializeUniqueData(List<string> i_MotorcycleData)
         {
-            m_LicenseType = (eLicenseType)Enum.Parse(typeof(eLicenseType), (i_MotorcycleData[0])); 
-            m_EngineVolume = int.Parse(i_MotorcycleData[1]);
+            if(i_MotorcycleData == null ||i_MotorcycleData.Count != 2)
+            {
+                throw new FormatException("Motorcycle data must contain license type and engine volume.");
+            }
+            if(!Enum.TryParse(i_MotorcycleData[0], out m_LicenseType))
+            {
+                throw new ArgumentException("Invalid license type.");
+            }
+            if(!int.TryParse(i_MotorcycleData[1], out m_EngineVolume))
+            {
+                throw new FormatException("Engine volume must be a valid integer.");
+            }
+            if (m_EngineVolume < 0)
+            {
+                throw new ValueRangeException(0, 1500000);
+            }
         }
 
       
@@ -53,6 +64,5 @@ namespace Ex03.GarageLogic
                 + "License type: " + m_LicenseType + "\n"
                 + "Engine volume: " + m_EngineVolume + " cc" + "\n";
         }
-
     }
 }

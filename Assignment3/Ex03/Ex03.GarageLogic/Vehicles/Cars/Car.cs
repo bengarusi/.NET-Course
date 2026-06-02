@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -41,8 +38,22 @@ namespace Ex03.GarageLogic
 
         public override void InitializeUniqueData(List<string> i_CarData)
         {
-            m_Color = (eCarColor)Enum.Parse(typeof(eCarColor), (i_CarData[0])); 
-            m_NumberOfDoors = int.Parse(i_CarData[1]);
+            if(i_CarData == null || i_CarData.Count != 2)
+            {
+                throw new FormatException("Car data must contain color and number of doors.");
+            }
+            if (!Enum.TryParse(i_CarData[0], out m_Color))
+            {
+                throw new ArgumentException("Invalid car color.");
+            }
+            if (!int.TryParse(i_CarData[1], out m_NumberOfDoors))
+            {
+                throw new FormatException("Number of doors must be a valid integer.");
+            }
+            if (m_NumberOfDoors < 2 || m_NumberOfDoors > 5)
+            {
+                throw new ValueRangeException(2, 5);
+            }
         }
 
         public override string ToString()

@@ -2,8 +2,7 @@
 {
     public class ElectricEngine : Engine
     {
-        public ElectricEngine(float i_MaxBatteryHours)
-            : base(i_MaxBatteryHours)
+        public ElectricEngine(float i_MaxBatteryHours) : base(i_MaxBatteryHours)
         {
         }
 

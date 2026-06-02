@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace Ex03.ConsoleUI
 {
@@ -20,7 +18,6 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("9. Exit");
             Console.WriteLine("====================================");
         }
-
     }
 }
-        
+       

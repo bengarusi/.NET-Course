@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -41,8 +37,22 @@ namespace Ex03.GarageLogic
 
         public override void InitializeUniqueData(List<string> i_TruckData)
         {
-            m_IsCarryingRefrigerantCargo = bool.Parse(i_TruckData[0]);
-            m_CargoVolume = float.Parse(i_TruckData[1]);
+            if (i_TruckData == null || i_TruckData.Count != 2)
+            {
+                throw new System.FormatException("Truck data must contain carrying refrigerated cargo and cargo volume.");
+            }
+            if (!bool.TryParse(i_TruckData[0], out m_IsCarryingRefrigerantCargo))
+            {
+                throw new System.FormatException("Invalid value for carrying refrigerated cargo.");
+            }
+            if (!float.TryParse(i_TruckData[1], out m_CargoVolume))
+            {
+                throw new System.FormatException("Cargo volume must be a valid number.");
+            }
+            if (m_CargoVolume < 0)
+            {
+                throw new ValueRangeException(0, 100000);
+            }
         }
         
         public override string ToString()

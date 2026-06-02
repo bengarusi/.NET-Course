@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
@@ -38,7 +35,10 @@ namespace Ex03.GarageLogic
         public void AddNewVehicle(NewVehicleData i_NewVehicleToAdd)
         {
             Vehicle vehicle = VehicleCreator.CreateVehicle(
-                i_NewVehicleToAdd.VehicleType, i_NewVehicleToAdd.LicenseNumber, i_NewVehicleToAdd.ModelName);
+                i_NewVehicleToAdd.VehicleType,
+                i_NewVehicleToAdd.LicenseNumber,
+                i_NewVehicleToAdd.ModelName);
+
             if (vehicle == null)
             {
                 throw new ArgumentException("Unsupported vehicle type.");
@@ -49,7 +49,9 @@ namespace Ex03.GarageLogic
             vehicle.InitializeUniqueData(i_NewVehicleToAdd.UniqueFields);
 
             GarageVehicleRecord record = new GarageVehicleRecord(
-                vehicle, i_NewVehicleToAdd.OwnerName, i_NewVehicleToAdd.OwnerPhoneNumber);
+                vehicle,
+                i_NewVehicleToAdd.OwnerName,
+                i_NewVehicleToAdd.OwnerPhoneNumber);
 
             r_VehiclesInGarage[vehicle.LicenseNumber] = record;
         }
@@ -134,7 +136,11 @@ namespace Ex03.GarageLogic
 
             return r_VehiclesInGarage[i_LicenseNumber];
         }
+        
+        public List<string> GetSupportedVehicleTypes()
+        {
+            return VehicleCreator.SupportedTypes;
+        }
 
     }
-
 }
