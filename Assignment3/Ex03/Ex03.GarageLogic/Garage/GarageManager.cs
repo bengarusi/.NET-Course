@@ -126,7 +126,7 @@ namespace Ex03.GarageLogic
         }
 
         
-        public GarageVehicleRecord GetVehicleRecord(string i_LicenseNumber)
+        private GarageVehicleRecord GetVehicleRecord(string i_LicenseNumber)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
