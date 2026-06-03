@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Wrong fuel type for this vehicle.");
             }
 
-            AddEnergy(i_LitersToAdd);
+            AddEnergy(i_LitersToAdd, "Invalid fuel amount (in liters).");
         }
 
         public override string ToString()

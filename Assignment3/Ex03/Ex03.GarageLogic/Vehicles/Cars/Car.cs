@@ -37,22 +37,22 @@ namespace Ex03.GarageLogic
         }
 
         public override void InitializeUniqueData(List<string> i_CarData)
-        {
+        { 
             if(i_CarData == null || i_CarData.Count != 2)
             {
                 throw new FormatException("Car data must contain color and number of doors.");
             }
-            if (!Enum.TryParse(i_CarData[0], out m_Color))
+            if (!Enum.TryParse(i_CarData[0], out m_Color) || !Enum.IsDefined(typeof(eCarColor), m_Color))
             {
                 throw new ArgumentException("Invalid car color.");
             }
             if (!int.TryParse(i_CarData[1], out m_NumberOfDoors))
             {
-                throw new FormatException("Number of doors must be a valid integer.");
+                throw new FormatException("Number of doors must be an Integer");
             }
             if (m_NumberOfDoors < 2 || m_NumberOfDoors > 5)
             {
-                throw new ValueRangeException(2, 5);
+                throw new ValueRangeException(2, 5, "Invalid number of doors.");
             }
         }
 

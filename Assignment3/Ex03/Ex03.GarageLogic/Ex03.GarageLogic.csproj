@@ -48,7 +48,7 @@
     <Compile Include="Vehicles\Motorcycles\ElectricMotorcycle.cs" />
     <Compile Include="Enums\eVehicleStatus.cs" />
     <Compile Include="Garage\GarageManager.cs" />
-    <Compile Include="Garage\DTOs\GarageVehicleRecord.cs" />
+    <Compile Include="Garage\GarageVehicleRecord.cs" />
     <Compile Include="Garage\VehicleFileLoader.cs" />
     <Compile Include="Enums\eCarColor.cs" />
     <Compile Include="Enums\eFuelType.cs" />

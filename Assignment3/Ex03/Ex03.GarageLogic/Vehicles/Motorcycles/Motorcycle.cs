@@ -43,7 +43,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("Motorcycle data must contain license type and engine volume.");
             }
-            if(!Enum.TryParse(i_MotorcycleData[0], out m_LicenseType))
+            if(!Enum.TryParse(i_MotorcycleData[0], out m_LicenseType) || !Enum.IsDefined(typeof(eLicenseType), m_LicenseType))
             {
                 throw new ArgumentException("Invalid license type.");
             }
@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
             }
             if (m_EngineVolume < 0)
             {
-                throw new ValueRangeException(0, 1500000);
+                throw new ValueRangeException(0, 1500000, "Invalid engine volume.");
             }
         }
 

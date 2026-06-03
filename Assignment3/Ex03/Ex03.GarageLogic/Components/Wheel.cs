@@ -1,4 +1,5 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+namespace Ex03.GarageLogic
 {
     public class Wheel
     {
@@ -30,7 +31,7 @@
         {
             if (i_CurrentAirPressure < 0 || i_CurrentAirPressure > r_MaxAirPressure)
             {
-                throw new ValueRangeException(0, r_MaxAirPressure);
+                throw new ValueRangeException(0, r_MaxAirPressure,"Invalid air pressure.");
             }
 
             m_ManufacturerName = i_ManufacturerName;
@@ -41,7 +42,7 @@
         {
             if (i_AirToAdd < 0 || m_CurrentAirPressure + i_AirToAdd > r_MaxAirPressure)
             {
-                throw new ValueRangeException(0, r_MaxAirPressure);
+                throw new ValueRangeException(0, r_MaxAirPressure, "Invalid air pressure.");
             }
 
             m_CurrentAirPressure += i_AirToAdd;

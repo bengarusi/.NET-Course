@@ -8,7 +8,7 @@
 
         public void Charge(float i_HoursToAdd)
         {
-            AddEnergy(i_HoursToAdd);
+            AddEnergy(i_HoursToAdd, "Invalid charge amount (in hours).");
         }
 
         public override string ToString()

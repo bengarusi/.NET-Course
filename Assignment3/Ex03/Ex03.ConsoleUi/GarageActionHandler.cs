@@ -60,7 +60,7 @@ namespace Ex03.ConsoleUI
 
             if (!isInGarage)
             {
-                Console.WriteLine("Vehicle with the specified license number was not found in the garage.");
+                Console.WriteLine("Vehicle with license number {0} was not found in the garage.", i_LicenseNumber);
             }
 
             return isInGarage;
@@ -101,72 +101,76 @@ namespace Ex03.ConsoleUI
             if (isLicenseEmpty)
             {
                 Console.WriteLine("License number cannot be empty. Operation cancelled.");
-                return;
-            }
-
-            if (r_GarageManager.IsVehicleInGarage(licenseNumber))
-            {
-                Console.WriteLine(string.Format("Vehicle with license number {0} is already in the garage. Changing status to InRepair.", licenseNumber));
-                r_GarageManager.ChangeVehicleStatus(licenseNumber, eVehicleStatus.InRepair);
             }
             else
             {
-                NewVehicleData newVehicleData = new NewVehicleData();
-                newVehicleData.LicenseNumber = licenseNumber;
-
-                Console.WriteLine("Please enter Vehicle Type:");
-                foreach (string vehicleType in r_GarageManager.GetSupportedVehicleTypes())
+                if (r_GarageManager.IsVehicleInGarage(licenseNumber))
                 {
-                    Console.Write(vehicleType);
-                    Console.Write(", ");
+                    Console.WriteLine(string.Format("Vehicle with license number {0} is already in the garage. Changing status to InRepair.", licenseNumber));
+                    r_GarageManager.ChangeVehicleStatus(licenseNumber, eVehicleStatus.InRepair);
                 }
-                Console.WriteLine();
-                newVehicleData.VehicleType = Console.ReadLine();
-
-                try
+                else
                 {
-                    List<string> requiredFields = r_GarageManager.GetRequiredFieldsForType(newVehicleData.VehicleType);
+                    NewVehicleData newVehicleData = new NewVehicleData();
+                    newVehicleData.LicenseNumber = licenseNumber;
 
-                    Console.WriteLine("Please enter Model Name:");
-                    newVehicleData.ModelName = Console.ReadLine();
-
-                    Console.WriteLine("Please enter Owner Name:");
-                    newVehicleData.OwnerName = Console.ReadLine();
-
-                    Console.WriteLine("Please enter Owner Phone Number:");
-                    newVehicleData.OwnerPhoneNumber = Console.ReadLine();
-
-                    Console.WriteLine("Please enter Wheel Manufacturer:");
-                    newVehicleData.WheelManufacturer = Console.ReadLine();
-
-                    Console.WriteLine("Please enter current energy percentage (0-100):");
-                    float number;
-                    newVehicleData.EnergyPercentage = float.TryParse(Console.ReadLine(), out number) ? number : -1;
-
-                    Console.WriteLine("Please enter wheels air pressure (applies to all wheels):");
-                    newVehicleData.CurrentAirPressure = float.TryParse(Console.ReadLine(), out number) ? number : -1;
-
-                    newVehicleData.UniqueFields = new List<string>();
-
-                    foreach (string field in requiredFields)
+                    Console.WriteLine("Please enter Vehicle Type:");
+                    foreach (string vehicleType in r_GarageManager.GetSupportedVehicleTypes())
                     {
-                        Console.WriteLine(string.Format("Please enter {0}:", field));
-                        newVehicleData.UniqueFields.Add(Console.ReadLine());
+                        Console.Write(vehicleType);
+                        if (vehicleType != r_GarageManager.GetSupportedVehicleTypes()[r_GarageManager.GetSupportedVehicleTypes().Count - 1])
+                        { 
+                            Console.Write(", ");
+                        }
                     }
+                    Console.WriteLine();
+                    newVehicleData.VehicleType = Console.ReadLine();
 
-                    if (!ValidateInputs.ValidateNewVehicleData(newVehicleData))
+                    try
                     {
-                        Console.WriteLine("Invalid input data. Vehicle was not added to the garage.");
+                        List<string> requiredFields = r_GarageManager.GetRequiredFieldsForType(newVehicleData.VehicleType);
+
+                        Console.WriteLine("Please enter Model Name:");
+                        newVehicleData.ModelName = Console.ReadLine();
+
+                        Console.WriteLine("Please enter Owner Name:");
+                        newVehicleData.OwnerName = Console.ReadLine();
+
+                        Console.WriteLine("Please enter Owner Phone Number:");
+                        newVehicleData.OwnerPhoneNumber = Console.ReadLine();
+
+                        Console.WriteLine("Please enter Wheel Manufacturer:");
+                        newVehicleData.WheelManufacturer = Console.ReadLine();
+
+                        Console.WriteLine("Please enter current energy percentage (0-100):");
+                        float number;
+                        newVehicleData.EnergyPercentage = float.TryParse(Console.ReadLine(), out number) ? number : -1;
+
+                        Console.WriteLine("Please enter wheels air pressure (applies to all wheels):");
+                        newVehicleData.CurrentAirPressure = float.TryParse(Console.ReadLine(), out number) ? number : -1;
+
+                        newVehicleData.UniqueFields = new List<string>();
+
+                        foreach (string field in requiredFields)
+                        {
+                            Console.WriteLine(string.Format("Please enter {0}:", field));
+                            newVehicleData.UniqueFields.Add(Console.ReadLine());
+                        }
+
+                        if (!ValidateInputs.ValidateInputNotEmpty(newVehicleData))
+                        {
+                            Console.WriteLine("Invalid input data. Vehicle was not added to the garage.");
+                        }
+                        else
+                        {
+                            r_GarageManager.AddNewVehicle(newVehicleData);
+                            Console.WriteLine("Vehicle successfully added to the garage.");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        r_GarageManager.AddNewVehicle(newVehicleData);
-                        Console.WriteLine("Vehicle successfully added to the garage.");
+                        Console.WriteLine(string.Format("Failed to add vehicle: {0}", ex.Message));
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(string.Format("Failed to add vehicle: {0}", ex.Message));
                 }
             }
         }
@@ -259,7 +263,7 @@ namespace Ex03.ConsoleUI
             if (checkVehicleInGarage(licenseNumber))
             {
                 eFuelType fuelType;
-                Console.WriteLine("Please enter fuel type:");
+                Console.WriteLine("Please enter fuel type(Soler/Octan95/Octan96/Ocatan98):");
                 if (Enum.TryParse(Console.ReadLine(), out fuelType))
                 {
                     Console.WriteLine("Please enter amount of fuel to add:");

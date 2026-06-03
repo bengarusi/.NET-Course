@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Ex03.GarageLogic
 {
@@ -51,7 +52,7 @@ namespace Ex03.GarageLogic
             }
             if (m_CargoVolume < 0)
             {
-                throw new ValueRangeException(0, 100000);
+                throw new ValueRangeException(0, 100000, "Invalid cargo volume.");
             }
         }
         
