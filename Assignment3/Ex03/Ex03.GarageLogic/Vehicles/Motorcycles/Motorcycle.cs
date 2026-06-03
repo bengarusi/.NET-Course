@@ -5,12 +5,12 @@ namespace Ex03.GarageLogic
 {
     public abstract class Motorcycle : Vehicle
     {
-        protected eLicenseType m_LicenseType;
-        protected int m_EngineVolume;
+        private eLicenseType m_LicenseType;
+        private int m_EngineVolume;
         private static readonly int sr_NumOfWheels = 2;
         private static readonly float sr_MaxAirPressure = 30f;
 
-        public Motorcycle(string i_Licence, string i_ModelName) :
+        protected Motorcycle(string i_Licence, string i_ModelName) :
              base(i_ModelName, i_Licence, sr_NumOfWheels, sr_MaxAirPressure)
         {
         }
@@ -39,15 +39,15 @@ namespace Ex03.GarageLogic
 
         public override void InitializeUniqueData(List<string> i_MotorcycleData)
         {
-            if(i_MotorcycleData == null ||i_MotorcycleData.Count != 2)
+            if (i_MotorcycleData == null || i_MotorcycleData.Count != 2)
             {
                 throw new FormatException("Motorcycle data must contain license type and engine volume.");
             }
-            if(!Enum.TryParse(i_MotorcycleData[0], out m_LicenseType) || !Enum.IsDefined(typeof(eLicenseType), m_LicenseType))
+            if (!Enum.TryParse(i_MotorcycleData[0], out m_LicenseType) || !Enum.IsDefined(typeof(eLicenseType), m_LicenseType))
             {
                 throw new ArgumentException("Invalid license type.");
             }
-            if(!int.TryParse(i_MotorcycleData[1], out m_EngineVolume))
+            if (!int.TryParse(i_MotorcycleData[1], out m_EngineVolume))
             {
                 throw new FormatException("Engine volume must be a valid integer.");
             }
@@ -57,7 +57,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-      
         public override string ToString()
         {
             return base.ToString()

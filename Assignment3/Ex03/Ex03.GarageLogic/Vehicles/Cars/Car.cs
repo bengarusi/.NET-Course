@@ -5,8 +5,8 @@ namespace Ex03.GarageLogic
 {
     public abstract class Car : Vehicle
     {
-        protected eCarColor m_Color;
-        protected int m_NumberOfDoors;
+        private eCarColor m_Color;
+        private int m_NumberOfDoors;
         private static readonly int sr_NumOfWheels = 5;
         private static readonly float sr_MaxAirPressure = 31f;
 
@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
 
         public override void InitializeUniqueData(List<string> i_CarData)
         { 
-            if(i_CarData == null || i_CarData.Count != 2)
+            if (i_CarData == null || i_CarData.Count != 2)
             {
                 throw new FormatException("Car data must contain color and number of doors.");
             }
@@ -64,5 +64,4 @@ namespace Ex03.GarageLogic
         }
 
     }
-
 }

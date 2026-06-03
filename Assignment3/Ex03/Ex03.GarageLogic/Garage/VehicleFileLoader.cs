@@ -29,7 +29,6 @@ namespace Ex03.GarageLogic
             return vehicleDataList;
         }
 
-
         private static NewVehicleData createVehicleFromLine(string i_Line)
         {
             string[] fields = i_Line.Split(',');

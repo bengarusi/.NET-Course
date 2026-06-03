@@ -40,15 +40,15 @@ namespace Ex03.GarageLogic
         {
             if (i_TruckData == null || i_TruckData.Count != 2)
             {
-                throw new System.FormatException("Truck data must contain carrying refrigerated cargo and cargo volume.");
+                throw new FormatException("Truck data must contain carrying refrigerated cargo and cargo volume.");
             }
             if (!bool.TryParse(i_TruckData[0], out m_IsCarryingRefrigerantCargo))
             {
-                throw new System.FormatException("Invalid value for carrying refrigerated cargo.");
+                throw new FormatException("Invalid value for carrying refrigerated cargo.");
             }
             if (!float.TryParse(i_TruckData[1], out m_CargoVolume))
             {
-                throw new System.FormatException("Cargo volume must be a valid number.");
+                throw new FormatException("Cargo volume must be a valid number.");
             }
             if (m_CargoVolume < 0)
             {
@@ -62,6 +62,5 @@ namespace Ex03.GarageLogic
                 + "Carrying cooled cargo: " + m_IsCarryingRefrigerantCargo + "\n"
                 + "Cargo volume: " + m_CargoVolume + "\n";
         }
-
     }
 }

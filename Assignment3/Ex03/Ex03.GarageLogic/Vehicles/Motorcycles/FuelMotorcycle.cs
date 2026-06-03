@@ -7,6 +7,5 @@
         {
             m_Engine = new FuelEngine(5.6f, eFuelType.Octan98);
         }
-        
     }
 }

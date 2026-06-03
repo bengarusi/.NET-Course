@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
         private string m_OwnerPhoneNumber;
         private eVehicleStatus m_VehicleStatus;
 
-
         public GarageVehicleRecord(Vehicle i_Vehicle, string i_OwnerName, string i_OwnerPhoneNumber)
         {
             r_Vehicle = i_Vehicle;

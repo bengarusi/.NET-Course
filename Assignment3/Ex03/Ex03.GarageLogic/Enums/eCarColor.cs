@@ -4,7 +4,7 @@
     {
         Red,
         Yellow,
-        Black ,
+        Black,
         Silver
     }
 }

@@ -65,6 +65,7 @@ namespace Ex03.ConsoleUI
 
             return isInGarage;
         }
+
         private void loadVehiclesFromFile()
         {
             try
@@ -175,8 +176,6 @@ namespace Ex03.ConsoleUI
             }
         }
 
-
-
         private void displayLicensePlates()
         {
             Console.WriteLine("Please enter filter option (All, InRepair, Repaired, Paid):");
@@ -184,7 +183,6 @@ namespace Ex03.ConsoleUI
             eVehicleStatus vehicleStatus;
             List<string> licensePlates = new List<string>();
             bool isValidFilter = true;
-
 
             if (filterOption == "All")
             {
@@ -234,7 +232,6 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Invalid status input. Status was not changed.");
                 }
-
             }
         }
 
@@ -263,7 +260,7 @@ namespace Ex03.ConsoleUI
             if (checkVehicleInGarage(licenseNumber))
             {
                 eFuelType fuelType;
-                Console.WriteLine("Please enter fuel type(Soler/Octan95/Octan96/Ocatan98):");
+                Console.WriteLine("Please enter fuel type(Soler/Octan95/Octan96/Octan98):");
                 if (Enum.TryParse(Console.ReadLine(), out fuelType))
                 {
                     Console.WriteLine("Please enter amount of fuel to add:");

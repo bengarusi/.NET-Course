@@ -1,5 +1,4 @@
 ﻿using Ex03.GarageLogic;
-
 using System;
 
 namespace Ex03.ConsoleUI
@@ -57,7 +56,6 @@ namespace Ex03.ConsoleUI
             }
             return isValid;
         }
-
 
         public static bool IsEmpty(string i_StringToCheck)
         {
