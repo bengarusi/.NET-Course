@@ -9,7 +9,7 @@ namespace Ex04.Menus.Test
     {
         public static MainMenu BuildMainMenu()
         {
-            MainMenu MainMenu = new MainMenu("Delegates Main Menu");
+            MainMenu MainMenu = new MainMenu("Interfaces Main Menu");
 
             SubMenuItem DateTimeSubMenu = MainMenu.AddSubMenuItem("Show Current Date/Time");
             DateTimeSubMenu.AddActionItem("Show Current Date", new ShowCurrentDate());
