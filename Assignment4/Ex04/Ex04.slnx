@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Ex04.Menus.Events/Ex04.Menus.Events.csproj" />
+  <Project Path="Ex04.Menus.Interfaces/Ex04.Menus.Interfaces.csproj" />
+  <Project Path="Ex04.Menus.Test/Ex04.Menus.Test.csproj" />
+</Solution>
