@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Ex04.Menus.Test
 {
-    public class CountCapitals : IMenuItemObserver
+    public class CountCapitals : IMenuAction
     {
-        public void Execute(MenuItem i_MenuItem)
+        public void Execute()
         {
             Console.WriteLine("Please enter a text:");
             string input = Console.ReadLine();
@@ -21,7 +21,7 @@ namespace Ex04.Menus.Test
                 }
             }
             Console.WriteLine("\n");
-            Console.WriteLine($"There are {capitalCount} capital letters in your text.");
+            Console.WriteLine($"> There are {capitalCount} capital letters in your text.\n");
         }
     }
 }

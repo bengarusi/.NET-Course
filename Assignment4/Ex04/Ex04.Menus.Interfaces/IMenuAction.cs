@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    public interface IMenuItemObserver
+    public interface IMenuAction
     {
-        void Execute(MenuItem i_MenuItem);
+        void Execute();
     }
 }

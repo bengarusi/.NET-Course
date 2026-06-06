@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Ex04.Menus.Test
 {
-    public class ShowCurrentTime : IMenuItemObserver
+    public class ShowCurrentTime : IMenuAction
     {
-        public void Execute(MenuItem i_MenuItem)
+        public void Execute()
         {
-            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"));
+            Console.WriteLine(DateTime.Now.ToString("> HH:mm:ss"));
             Console.WriteLine("\n");
         }
     }

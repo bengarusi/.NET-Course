@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class ConsoleMenuRenderer
+    internal class ConsoleMenuRenderer
     {
         public static void ClearScreen()
         {
@@ -34,9 +34,9 @@ namespace Ex04.Menus.Interfaces
             Console.WriteLine("0. {0}", i_Text);
         }
 
-        public static void PrintChoiceRequest(int i_MinValue , int i_MaxValue , string i_Text)
+        public static void PrintChoiceRequest(int i_MinValue , int i_MaxValue , bool i_IsMainMenu)
         {
-            Console.Write("Please enter your choice ({0}-{1} ,{2}): ", i_MinValue , i_MaxValue, i_Text);
+            Console.Write("Please enter your choice ({0}-{1} {2}): ", i_MinValue , i_MaxValue, i_IsMainMenu ? "or 0 to exit" : "or 0 to go back");
         }
 
         public static void PrintInvalidChoiceMessage()

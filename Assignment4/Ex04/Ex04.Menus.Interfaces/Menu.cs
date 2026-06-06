@@ -4,25 +4,25 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    public class Menu
+    internal class Menu
     {
         private readonly string r_Title;
         private readonly List<MenuItem> r_MenuItems;
         private readonly bool r_IsMainMenu;
 
-        public Menu (string i_Title, bool i_IsMainMenu)
+        public Menu(string i_Title, bool i_IsMainMenu)
         {
             r_Title = i_Title;
             r_MenuItems = new List<MenuItem>();
             r_IsMainMenu = i_IsMainMenu;
         }
 
-        public void AddMenuItem (MenuItem i_MenuItem)
+        internal void AddMenuItem(MenuItem i_MenuItem)
         {
             r_MenuItems.Add(i_MenuItem);
         }
 
-        public virtual void Show()
+        internal void Show()
         {
             bool shouldExit = false;
 
@@ -33,10 +33,9 @@ namespace Ex04.Menus.Interfaces
                 if (isExitOrBackChoosen(userChoice))
                 {
                     shouldExit = true;
-                    Console.WriteLine(r_IsMainMenu ? "Exiting the application..." : "Going back to the previous menu...");
                 }
                 else
-                {   
+                {
                     Console.WriteLine("\n");
                     executeChoice(userChoice);
                 }
@@ -63,7 +62,7 @@ namespace Ex04.Menus.Interfaces
             bool isValidChoice = false;
             while (!isValidChoice)
             {
-                Console.Write("Please enter your choice: ");
+                ConsoleMenuRenderer.PrintChoiceRequest(1, r_MenuItems.Count, r_IsMainMenu);
                 string input = Console.ReadLine();
                 if (int.TryParse(input, out userChoice) && userChoice >= 0 && userChoice <= r_MenuItems.Count)
                 {
@@ -71,7 +70,7 @@ namespace Ex04.Menus.Interfaces
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice. Please try again.");
+                    ConsoleMenuRenderer.PrintInvalidChoiceMessage();
                 }
             }
             return userChoice;
@@ -88,6 +87,8 @@ namespace Ex04.Menus.Interfaces
         private bool isExitOrBackChoosen(int i_Choice)
         {
             return i_Choice == 0;
-        }   
+        }
+
+      
     }
 }

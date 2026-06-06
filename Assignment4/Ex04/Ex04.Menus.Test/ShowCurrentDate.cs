@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Ex04.Menus.Test
 {
-    public class ShowCurrentDate : IMenuItemObserver
+    public class ShowCurrentDate : IMenuAction
     {
-        public void Execute(MenuItem i_MenuItem)
+        public void Execute()
         {
-            Console.WriteLine($"Current date is {DateTime.Now.ToShortDateString()}");
+            Console.WriteLine(DateTime.Now.ToString("'> Current Date is 'dd/MM/yyyy"));
+           // Console.WriteLine($"Current Date is {DateTime.Now.ToShortDateString()}");
             Console.WriteLine("\n");
         }
     }

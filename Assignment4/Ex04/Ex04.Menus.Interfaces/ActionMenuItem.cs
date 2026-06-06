@@ -6,17 +6,17 @@ namespace Ex04.Menus.Interfaces
 {
     public class ActionMenuItem : MenuItem
     {
-        private readonly IMenuItemObserver r_Observer;
+        private readonly IMenuAction r_MenuAction;
 
-        public ActionMenuItem(string i_Title, IMenuItemObserver i_Observer) : base(i_Title)
+        public ActionMenuItem(string i_Title, IMenuAction i_MenuAction) : base(i_Title)
         {
-            r_Observer = i_Observer;
+            r_MenuAction = i_MenuAction;
         }
 
         public override void Execute()
         {
             ConsoleMenuRenderer.ClearScreen();
-            r_Observer.Execute(this);
+            r_MenuAction.Execute();
         }
     }
 }

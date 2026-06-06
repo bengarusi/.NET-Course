@@ -24,7 +24,7 @@ namespace Ex04.Menus.Interfaces
             r_SubMenu.AddMenuItem(subMenuItem);
         }
 
-        public void AddActionItem(string i_Title, IMenuItemObserver i_Observer)
+        public void AddActionItem(string i_Title, IMenuAction i_Observer)
         {
             ActionMenuItem actionItem = new ActionMenuItem(i_Title, i_Observer);
             r_SubMenu.AddMenuItem(actionItem);
