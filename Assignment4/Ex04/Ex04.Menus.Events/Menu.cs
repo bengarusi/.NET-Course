@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Events
+﻿namespace Ex04.Menus.Events
 {
     internal class Menu
     {
@@ -25,18 +21,19 @@ namespace Ex04.Menus.Events
         internal void Show()
         {
             bool shouldExit = false;
+            int userChoice;
 
             while (!shouldExit)
             {
                 printMenu();
-                int userChoice = getValidChoiceFromUser();
+                userChoice = getValidChoiceFromUser();
+
                 if (isExitOrBackChoosen(userChoice))
                 {
                     shouldExit = true;
                 }
                 else
                 {
-                    Console.WriteLine("\n");
                     executeChoice(userChoice);
                 }
             }
@@ -60,10 +57,12 @@ namespace Ex04.Menus.Events
         {
             int userChoice = 0;
             bool isValidChoice = false;
+            string input;
+
             while (!isValidChoice)
             {
                 ConsoleMenuRenderer.PrintChoiceRequest(1, r_MenuItems.Count, r_IsMainMenu);
-                string input = Console.ReadLine();
+                input = Console.ReadLine();
                 if (int.TryParse(input, out userChoice) && userChoice >= 0 && userChoice <= r_MenuItems.Count)
                 {
                     isValidChoice = true;
@@ -73,8 +72,8 @@ namespace Ex04.Menus.Events
                     ConsoleMenuRenderer.PrintInvalidChoiceMessage();
                 }
             }
-            return userChoice;
 
+            return userChoice;
         }
 
         private void executeChoice(int i_Choice)
@@ -88,7 +87,5 @@ namespace Ex04.Menus.Events
         {
             return i_Choice == 0;
         }
-
-      
     }
 }

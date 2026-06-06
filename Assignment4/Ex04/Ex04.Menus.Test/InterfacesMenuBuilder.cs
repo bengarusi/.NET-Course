@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex04.Menus.Interfaces;
+﻿using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
@@ -9,16 +6,17 @@ namespace Ex04.Menus.Test
     {
         public static MainMenu BuildMainMenu()
         {
-            MainMenu MainMenu = new MainMenu("Interfaces Main Menu");
+            MainMenu mainMenu = new MainMenu("Interfaces Main Menu");
 
-            SubMenuItem DateTimeSubMenu = MainMenu.AddSubMenuItem("Show Current Date/Time");
-            DateTimeSubMenu.AddActionItem("Show Current Date", new ShowCurrentDate());
-            DateTimeSubMenu.AddActionItem("Show Current Time", new ShowCurrentTime());
+            SubMenuItem dateTimeSubMenu = mainMenu.AddSubMenuItem("Show Current Date/Time");
+            dateTimeSubMenu.AddActionItem("Show Current Date", new ShowCurrentDate());
+            dateTimeSubMenu.AddActionItem("Show Current Time", new ShowCurrentTime());
             
-            SubMenuItem VersionAndCapitals = MainMenu.AddSubMenuItem("Version and Capitals");
-            VersionAndCapitals.AddActionItem("Count Capitals", new CountCapitals());
-            VersionAndCapitals.AddActionItem("Show Version", new ShowVersion());
-            return MainMenu;
+            SubMenuItem versionAndCapitals = mainMenu.AddSubMenuItem("Version and Capitals");
+            versionAndCapitals.AddActionItem("Count Capitals", new CountCapitals());
+            versionAndCapitals.AddActionItem("Show Version", new ShowVersion());
+
+            return mainMenu;
         }
     }
 }

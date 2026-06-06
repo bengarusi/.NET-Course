@@ -1,7 +1,4 @@
 ﻿using Ex04.Menus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ex04.Menus.Test
 {
@@ -9,8 +6,8 @@ namespace Ex04.Menus.Test
     {
         public void Execute()
         {
-            Console.WriteLine(DateTime.Now.ToString("> HH:mm:ss"));
-            Console.WriteLine("\n");
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"));
+            Console.WriteLine();
         }
     }
 }

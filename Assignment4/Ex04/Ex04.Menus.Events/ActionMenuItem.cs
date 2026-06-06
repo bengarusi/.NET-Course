@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Events
+﻿namespace Ex04.Menus.Events
 {
     public class ActionMenuItem : MenuItem
     {
         public event Action MenuItemSelected;
 
-        public ActionMenuItem(string i_Title) : base(i_Title) {}
+        public ActionMenuItem(string i_Title) : base(i_Title)
+        {
+        }
 
         public override void Execute()
         {
@@ -20,6 +18,5 @@ namespace Ex04.Menus.Events
         {
             MenuItemSelected?.Invoke();
         }
-
     }
 }
