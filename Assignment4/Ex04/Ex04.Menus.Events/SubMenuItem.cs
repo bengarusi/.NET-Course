@@ -10,7 +10,7 @@
             r_SubMenu = new Menu(i_Title, !v_IsMainMenu);
         }
 
-        public SubMenuItem AddSubMenuItem(string i_Title)
+        public SubMenuItem AddSubMenuItem(string i_Title) // Not in use now but will be more convenient to use in the future
         {
             SubMenuItem subMenuItem = new SubMenuItem(i_Title);
             r_SubMenu.AddMenuItem(subMenuItem);

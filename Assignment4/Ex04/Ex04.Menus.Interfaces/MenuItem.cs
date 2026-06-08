@@ -8,10 +8,12 @@
         {
             r_Title = i_Title;
         }
+
         public string Title
         {
             get { return r_Title; }
         }
+
         public abstract void Execute();
     }
 }

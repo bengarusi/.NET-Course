@@ -43,14 +43,9 @@
         {
             ConsoleMenuRenderer.PrintTitle(r_Title);
             ConsoleMenuRenderer.PrintMenuItems(r_MenuItems);
-            if (r_IsMainMenu)
-            {
-                ConsoleMenuRenderer.PrintZeroOption("Exit");
-            }
-            else
-            {
-                ConsoleMenuRenderer.PrintZeroOption("Back");
-            }
+
+            string zeroOptionText = r_IsMainMenu ? "Exit" : "Back";
+            ConsoleMenuRenderer.PrintZeroOption(zeroOptionText);
         }
 
         private int getValidChoiceFromUser()
@@ -80,7 +75,6 @@
         {
             MenuItem selectedItem = r_MenuItems[i_Choice - 1];
             selectedItem.Execute();
-
         }
 
         private bool isExitOrBackChoosen(int i_Choice)

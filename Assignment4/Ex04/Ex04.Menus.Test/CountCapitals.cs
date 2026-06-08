@@ -20,7 +20,7 @@ namespace Ex04.Menus.Test
                 }
             }
 
-            Console.WriteLine($"There are {capitalCount} uppercase letters in your text.\n");
+            Console.WriteLine("There are {0} uppercase letters in your text.\n", capitalCount);
         }
     }
 }
