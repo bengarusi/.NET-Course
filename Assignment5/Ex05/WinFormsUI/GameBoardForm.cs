@@ -14,6 +14,7 @@ namespace WinFormsUI
 
         private readonly GameManager r_GameManager;
         private readonly Button[,] r_CellButtons;
+
         private int m_ScoreLabelsTop = 0;
 
         public GameBoardForm(GameManager i_GameManager)
@@ -52,9 +53,7 @@ namespace WinFormsUI
         {
             Button cellButton = new Button();
             cellButton.Size = new Size(k_CellSize, k_CellSize);
-            cellButton.Location = new Point(
-                k_Margin + (i_Col * k_CellSize),
-                k_Margin + (i_Row * k_CellSize));
+            cellButton.Location = new Point(k_Margin + (i_Col * k_CellSize), k_Margin + (i_Row * k_CellSize));
             cellButton.Font = new Font("Microsoft Sans Serif", 16F, FontStyle.Bold);
             cellButton.Tag = new Point(i_Row, i_Col);
             cellButton.Click += cellButton_Click;
@@ -109,9 +108,7 @@ namespace WinFormsUI
                 messageCaption = "A Tie!";
             }
 
-            EndRoundForm roundEndDialogForm = new EndRoundForm(roundEndMessage, messageCaption);
-            DialogResult userAnswer = roundEndDialogForm.ShowDialog(this);
-            if (userAnswer == DialogResult.Yes)
+            if (MessageBox.Show(this, roundEndMessage, messageCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 r_GameManager.StartNewRound();
             }
@@ -129,7 +126,7 @@ namespace WinFormsUI
             {
                 for (int col = 0; col < boardSize; col++)
                 {
-                    r_CellButtons[row, col].Text = string.Empty;
+                    r_CellButtons[row, col].Text = "";
                     r_CellButtons[row, col].Enabled = true;
                 }
             }

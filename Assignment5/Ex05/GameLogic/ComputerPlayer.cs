@@ -40,11 +40,7 @@ namespace GameLogic
             return chooseRandomMove(safeMoves, safeMovesCount, fallbackMoves, fallbackMovesCount);
         }
 
-        private Move chooseRandomMove(
-            Move[] i_SafeMoves,
-            int i_SafeMovesCount,
-            Move[] i_FallbackMoves,
-            int i_FallbackMovesCount)
+        private Move chooseRandomMove(Move[] i_SafeMoves, int i_SafeMovesCount, Move[] i_FallbackMoves, int i_FallbackMovesCount)
         {
             Move chosenMove;
 

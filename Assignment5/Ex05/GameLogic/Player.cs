@@ -5,6 +5,7 @@ namespace GameLogic
 		private readonly string r_Name;
 		private readonly eSign r_Sign;
 		private readonly bool r_IsComputer;
+
 		private int m_Score = 0;
 
 		public Player(string i_Name, eSign i_Sign, bool i_IsComputer)

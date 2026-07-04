@@ -4,12 +4,13 @@ namespace GameLogic
 	{
 		private readonly int r_Size;
 		private readonly eSign[,] r_Cells;
+
 		private int m_FilledCellsCount = 0;
 
 		public Board(int i_Size)
 		{
 			r_Size = i_Size;
-			r_Cells = new eSign[r_Size, r_Size];
+			r_Cells	= new eSign[r_Size, r_Size];
 		}
 
 		public int Size
@@ -30,8 +31,8 @@ namespace GameLogic
 		public bool FillCell(Move i_Move, eSign i_Sign)
 		{
 			bool isFilled = false;
-			int row = i_Move.Row;
-			int col = i_Move.Col;
+			int	 row = i_Move.Row;
+			int	 col = i_Move.Col;
 
 			if (isInRange(row, col) && r_Cells[row, col] == eSign.Empty)
 			{

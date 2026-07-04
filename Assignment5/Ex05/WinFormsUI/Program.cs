@@ -4,18 +4,20 @@ using GameLogic;
 
 namespace WinFormsUI
 {
-	internal static class Program
+	public class Program
 	{
-		private static void Main()
+		public static void Main()
 		{
 			ApplicationConfiguration.Initialize();
 			SettingsForm settingsForm = new SettingsForm();
-			if (settingsForm.ShowDialog() == DialogResult.OK)
-			{
-				GameManager gameManager = new GameManager(settingsForm.Settings);
-				Application.Run(new GameBoardForm(gameManager));
-			}
+            settingsForm.ShowDialog();
 
-		}
+            if (settingsForm.IsStartClicked)
+            {
+                GameManager gameManager = new GameManager(settingsForm.Settings);
+                Application.Run(new GameBoardForm(gameManager));
+            }
+
+        }
 	}
 }

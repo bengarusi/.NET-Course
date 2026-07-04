@@ -12,11 +12,13 @@ namespace WinFormsUI
 		private const string k_ComputerName = "Computer";
 
 		private bool m_IsSyncingBoardSize = false;
+        public bool IsStartClicked { get; private set; }
 
-		public SettingsForm()
+        public SettingsForm()
 		{
 			InitializeComponent();
-		}
+            IsStartClicked = false;
+        }
 
 		public GameSettings Settings
 		{
@@ -64,30 +66,30 @@ namespace WinFormsUI
 			return player2Name;
 		}
 
-		private string getNameOrDefault(string i_Text, string i_DefaultName)
-		{
-			string trimmedText = i_Text.Trim();
-			string nameOrDefault;
+        private string getNameOrDefault(string i_Text, string i_DefaultName)
+        {
+            string nameOrDefault;
 
-			if (trimmedText.Length == 0)
-			{
-				nameOrDefault = i_DefaultName;
-			}
-			else
-			{
-				nameOrDefault = trimmedText;
-			}
+            
+            if (string.IsNullOrWhiteSpace(i_Text))
+            {
+                nameOrDefault = i_DefaultName;
+            }
+            else
+            {
+                nameOrDefault = i_Text; 
+            }
 
-			return nameOrDefault;
-		}
+            return nameOrDefault;
+        }
 
-		private void checkBoxPlayer2_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxPlayer2_CheckedChanged(object sender, EventArgs e)
 		{
 			textBoxPlayer2.Enabled = checkBoxPlayer2.Checked;
 
 			if (checkBoxPlayer2.Checked)
 			{
-				textBoxPlayer2.Text = string.Empty;
+				textBoxPlayer2.Text = "";
 			}
 			else
 			{
@@ -117,8 +119,8 @@ namespace WinFormsUI
 
 		private void buttonStart_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.OK;
-			this.Close();
-		}
+            IsStartClicked = true;
+            this.Close();
+        }
 	}
 }
