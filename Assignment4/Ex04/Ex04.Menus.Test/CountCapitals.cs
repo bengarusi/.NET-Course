@@ -1,8 +1,4 @@
 ﻿using Ex04.Menus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 
 namespace Ex04.Menus.Test
 {
@@ -10,18 +6,21 @@ namespace Ex04.Menus.Test
     {
         public void Execute()
         {
-            Console.WriteLine("Please enter a text:");
-            string input = Console.ReadLine();
+            string input;
             int capitalCount = 0;
-            foreach (char c in input)
+
+            Console.WriteLine("Please enter a text:");
+            input = Console.ReadLine();
+
+            foreach (char currentChar in input)
             {
-                if (char.IsUpper(c))
+                if (char.IsUpper(currentChar))
                 {
                     capitalCount++;
                 }
             }
-            Console.WriteLine("\n");
-            Console.WriteLine($"> There are {capitalCount} capital letters in your text.\n");
+
+            Console.WriteLine("There are {0} uppercase letters in your text.\n", capitalCount);
         }
     }
 }

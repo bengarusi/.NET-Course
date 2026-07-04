@@ -1,8 +1,4 @@
 ﻿using Ex04.Menus.Interfaces;
-using Ex04.Menus.Events;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ex04.Menus.Test
 {
@@ -10,8 +6,8 @@ namespace Ex04.Menus.Test
     {
         public void Execute()
         {
-            Console.WriteLine(DateTime.Now.ToString("'> Current Date is 'dd/MM/yyyy"));
-            Console.WriteLine("\n");
+            Console.WriteLine("Current Date is {0}", DateTime.Now.ToString("dd/MM/yyyy"));
+            Console.WriteLine();
         }
     }
 }

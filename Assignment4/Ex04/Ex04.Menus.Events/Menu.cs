@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Events
+﻿namespace Ex04.Menus.Events
 {
     internal class Menu
     {
@@ -25,18 +21,19 @@ namespace Ex04.Menus.Events
         internal void Show()
         {
             bool shouldExit = false;
+            int userChoice;
 
             while (!shouldExit)
             {
                 printMenu();
-                int userChoice = getValidChoiceFromUser();
+                userChoice = getValidChoiceFromUser();
+
                 if (isExitOrBackChoosen(userChoice))
                 {
                     shouldExit = true;
                 }
                 else
                 {
-                    Console.WriteLine("\n");
                     executeChoice(userChoice);
                 }
             }
@@ -46,24 +43,21 @@ namespace Ex04.Menus.Events
         {
             ConsoleMenuRenderer.PrintTitle(r_Title);
             ConsoleMenuRenderer.PrintMenuItems(r_MenuItems);
-            if (r_IsMainMenu)
-            {
-                ConsoleMenuRenderer.PrintZeroOption("Exit");
-            }
-            else
-            {
-                ConsoleMenuRenderer.PrintZeroOption("Back");
-            }
+
+            string zeroOptionText = r_IsMainMenu ? "Exit" : "Back";
+            ConsoleMenuRenderer.PrintZeroOption(zeroOptionText);
         }
 
         private int getValidChoiceFromUser()
         {
             int userChoice = 0;
             bool isValidChoice = false;
+            string input;
+
             while (!isValidChoice)
             {
                 ConsoleMenuRenderer.PrintChoiceRequest(1, r_MenuItems.Count, r_IsMainMenu);
-                string input = Console.ReadLine();
+                input = Console.ReadLine();
                 if (int.TryParse(input, out userChoice) && userChoice >= 0 && userChoice <= r_MenuItems.Count)
                 {
                     isValidChoice = true;
@@ -73,22 +67,19 @@ namespace Ex04.Menus.Events
                     ConsoleMenuRenderer.PrintInvalidChoiceMessage();
                 }
             }
-            return userChoice;
 
+            return userChoice;
         }
 
         private void executeChoice(int i_Choice)
         {
             MenuItem selectedItem = r_MenuItems[i_Choice - 1];
             selectedItem.Execute();
-
         }
 
         private bool isExitOrBackChoosen(int i_Choice)
         {
             return i_Choice == 0;
         }
-
-      
     }
 }

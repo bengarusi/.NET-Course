@@ -16,7 +16,6 @@ namespace Ex04.Menus.Test
             showTimeAction.MenuItemSelected += new ShowCurrentTime().Execute;
 
             SubMenuItem versionAndCapitals = mainMenu.AddSubMenuItem("Version and Capitals");
-
             
             ActionMenuItem countCapitalsAction = versionAndCapitals.AddActionItem("Count Capitals");
             countCapitalsAction.MenuItemSelected += new CountCapitals().Execute;

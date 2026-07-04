@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Interfaces
+﻿namespace Ex04.Menus.Interfaces
 {
     public class SubMenuItem : MenuItem
     {
         private readonly Menu r_SubMenu;
+
         public SubMenuItem(string i_Title) : base(i_Title)
         {
-            r_SubMenu = new Menu(i_Title, false);
+            const bool v_IsMainMenu = true;
+            r_SubMenu = new Menu(i_Title, !v_IsMainMenu);
         }
 
-        public SubMenuItem AddSubMenuItem(string i_Title)
+        public SubMenuItem AddSubMenuItem(string i_Title) // Not in use now but will be more convenient to use in the future
         {
             SubMenuItem subMenuItem = new SubMenuItem(i_Title);
             r_SubMenu.AddMenuItem(subMenuItem);
-            return subMenuItem;
-        }
 
-        public void AddSubMenu(SubMenuItem subMenuItem)
-        {
-            r_SubMenu.AddMenuItem(subMenuItem);
+            return subMenuItem;
         }
 
         public void AddActionItem(string i_Title, IMenuAction i_Observer)
         {
             ActionMenuItem actionItem = new ActionMenuItem(i_Title, i_Observer);
+
             r_SubMenu.AddMenuItem(actionItem);
         }
 
@@ -35,7 +30,6 @@ namespace Ex04.Menus.Interfaces
             ConsoleMenuRenderer.ClearScreen();
             r_SubMenu.Show();
             ConsoleMenuRenderer.ClearScreen();
-        }
-        
+        }  
     }
 }

@@ -1,21 +1,16 @@
-﻿using System;
-using Ex04.Menus.Interfaces;
-using Ex04.Menus.Events;
-
-
-namespace Ex04.Menus.Test
+﻿namespace Ex04.Menus.Test
 {
     public class Program
     {
         public static void Main()   
         {
-            Interfaces.MainMenu InterfacesMenu = InterfacesMenuBuilder.BuildMainMenu();
-            InterfacesMenu.Show();
+            Interfaces.MainMenu interfacesMenu = InterfacesMenuBuilder.BuildMainMenu();
+            interfacesMenu.Show();
 
             Console.Clear();
 
-            Events.MainMenu EventsMenu = EventsMenuBuilder.BuildMainMenu();
-            EventsMenu.Show();
+            Events.MainMenu eventsMenu = EventsMenuBuilder.BuildMainMenu();
+            eventsMenu.Show();
         }
     }
 }
