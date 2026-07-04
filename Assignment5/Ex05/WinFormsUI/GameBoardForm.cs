@@ -7,7 +7,7 @@ namespace WinFormsUI
 {
     public partial class GameBoardForm : Form
     {
-        private const int k_CellSize = 50;
+        private const int k_CellSize = 100;
         private const int k_Margin = 40;
         private const int k_ScoreAreaHeight = 40;
         private const int k_ScoreGap = 20;

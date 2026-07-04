@@ -13,9 +13,7 @@ namespace GameLogic
 		private Player m_CurrentPlayer;
 
 		public delegate void CellChangedEventHandler(object sender, CellChangedEventArgs e);
-
 		public delegate void RoundEndedEventHandler(object sender, RoundEndedEventArgs e);
-
 		public delegate void ScoreChangedEventHandler(object sender, ScoreChangedEventArgs e);
 
 		public event CellChangedEventHandler CellChanged;
